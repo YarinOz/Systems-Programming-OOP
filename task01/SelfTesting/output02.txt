@@ -1,0 +1,51 @@
+Elevator is currently at floor: 0
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Seventh floor
+Passing Floor 1
+Passing Floor 2
+Passing Floor 3
+Passing Floor 4
+Passing Floor 5
+Passing Floor 6
+Passing Floor 7
+Arrived at Floor 7
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Second floor
+Passing Floor 6
+Passing Floor 5
+Passing Floor 4
+Passing Floor 3
+Passing Floor 2
+Arrived at Floor 2
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Number is out of range.
+
+Invalid floor number.
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Ninth floor
+Passing Floor 3
+Passing Floor 4
+Passing Floor 5
+Passing Floor 6
+Passing Floor 7
+Passing Floor 8
+Passing Floor 9
+Arrived at Floor 9
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Zeroth floor
+Passing Floor 8
+Passing Floor 7
+Passing Floor 6
+Passing Floor 5
+Passing Floor 4
+Passing Floor 3
+Passing Floor 2
+Passing Floor 1
+Passing Floor 0
+Arrived at Floor 0
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Zeroth floor
+Arrived at Floor 0
+Enter the floor number you wish to go to (-1 to exit): 
+You requested to go to the Number is out of range.
+Elevator simulation ended.
