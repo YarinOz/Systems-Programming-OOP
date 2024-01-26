@@ -7,28 +7,117 @@
 #define MIN_TREASURE_COUNT 5
 #define MAX_MOVES 20
 
-int treasuresFound = 0;
+void grid_init(char grid[GRID_SIZE][GRID_SIZE]){
+    for (int i = 0; i < GRID_SIZE; i++){
+        for (int j = 0; j < GRID_SIZE; j++){
+            grid[i][j] = '_';
+        }
+    }
+}
+
+void treasure_init(char grid[GRID_SIZE][GRID_SIZE]){
+    srand(2024);
+    int treasuresPlaced = 0;
+    while (treasuresPlaced < TREASURE_COUNT){
+        int randrow = rand() % GRID_SIZE;
+        int randcol = rand() % GRID_SIZE;
+        if (grid[randrow][randcol] == '_'){
+            grid[randrow][randcol] = 'T';
+            treasuresPlaced++;
+        }
+    }
+}
+
+void Player_init(int* playerrow, int* playercol){ 
+    srand(2024);
+    *playerrow = rand() % GRID_SIZE;
+    *playercol = rand() % GRID_SIZE;
+}
+
+void print_turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){
+        for (int i = 0; i < GRID_SIZE; i++){
+            for (int j = 0; j < GRID_SIZE; j++){
+                if (i == *playerrow && j == *playercol)
+                    printf("P ");
+                else
+                    printf("%c ", grid[i][j]);
+            }
+            printf("\n");
+            // fflush(stdout);   // flush output may need tobe removed
+        }
+    printf("\nmoves = '%d' Treasures Found = '%d'\n\n", *moves, *treasuresFound);
+    printf("Enter move (D/L/U/R):");
+}
+
+void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){
+    char move;
+    scanf(" %c", &move);  // check for invalid input
+    switch (move){
+        case 'D':
+            if ((*playerrow) <= GRID_SIZE - 1){  // cant move down if at bottom of grid
+                (*playerrow)++;
+                (*moves)++;
+            }
+            else
+                printf("\nInvalid move\n");
+            break;
+        case 'U':
+            if ((*playerrow) > 0){  // cant move up if at top of grid
+                (*playerrow)--;
+                (*moves)++;
+            }
+            else
+                printf("\nInvalid move\n"); 
+            break;
+        case 'L':
+            if ((*playercol) > 0){  // cant move left if at left of grid
+                (*playercol)--;
+                (*moves)++;
+            }
+            else
+                printf("\nInvalid move\n");
+            break;
+        case 'R':
+            if ((*playercol) <= GRID_SIZE - 1){  // cant move right if at right of grid
+                (*playercol)++;
+                (*moves)++;
+            }
+            else
+                printf("\nInvalid move\n");
+            break;
+        default:
+            printf("\nInvalid move\n");
+            break;
+    }
+    if (grid[*playerrow][*playercol] == 'T'){
+        (*treasuresFound)++;
+        grid[*playerrow][*playercol] = '_';
+    }
+}
+
+// on invalid move, print "Invalid move" and do not increment treasurefound if spawnd on treasure (mail le rami)
 
 int main(int argc, char *argv[]){
 
-    // insert code here  //
-    // INIT + Algorithem:
-    // possible_values = ['T', '_', 'P']; in the grid we see Treasure, _Blank, Player
-    // grid = char array[GRID_SIZE][GRID_SIZE];
-    // initialize grid with '_'
-    // possible_moves = ['U', 'D', 'L', 'R']; Up, Down, Left, Right {map to [[i-1][j], [i+1][j], [i][j-1], [i][j+1]]}
-    // srand(2024); create a random seed
-    // int randrow = rand() % 3;
-    // int randcol = rand() % 3;
-    // Randomize P location:
-    // grid[randrow][randcol] = 'P';
-    // Randomize Treasures:
-    // treasureGen(grid, TREASURE_COUNT)  generate 6 random Treasures
-    // Flow: map generated -> player moves U,D,L,R until (20 moves exceeded | found at least 5 treasures) 
+    int playercol, playerrow, moves = 0, treasuresFound = 0;
+    char grid[GRID_SIZE][GRID_SIZE];
 
+    grid_init(grid);
+    treasure_init(grid);
+    Player_init(&playerrow, &playercol);
 
-    if (treasuresFound >= MIN_TREASURE_COUNT)
+    print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
+
+    while (moves < MAX_MOVES && treasuresFound < MIN_TREASURE_COUNT)
+    {
+        turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
+        print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
+    }
+    
+
+    if (treasuresFound >= MIN_TREASURE_COUNT){
         printf("\nCongratulations! You found all the treasures.\n");
+        printf("You took %d moves.\n", moves);}
     else
         printf("\nSorry, you ran out of moves.\n");
     return 0;
