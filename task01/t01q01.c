@@ -43,10 +43,9 @@ void print_turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol,
                     printf("%c ", grid[i][j]);
             }
             printf("\n");
-            // fflush(stdout);   // flush output may need tobe removed
         }
-    printf("\nmoves = '%d' Treasures Found = '%d'\n\n", *moves, *treasuresFound);
-    printf("Enter move (D/L/U/R):");
+    printf("\nmoves = %d Treasures Found = %d\n\n", *moves, *treasuresFound);
+    printf("Enter move (D/L/U/R):\n");
 }
 
 void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){
@@ -96,18 +95,23 @@ void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* 
 }
 
 // on invalid move, print "Invalid move" and do not increment treasurefound if spawnd on treasure (mail le rami)
+// on testing extra print with 9 moves with 8 moves in fact, wins 5 treausres but sais ran out of moves
+// does input consider white key as a valid input? (mail le rami)
 
 int main(int argc, char *argv[]){
 
     int playercol, playerrow, moves = 0, treasuresFound = 0;
     char grid[GRID_SIZE][GRID_SIZE];
 
+    // initialize grid, treasures, and player
     grid_init(grid);
     treasure_init(grid);
     Player_init(&playerrow, &playercol);
 
+    // print initial grid
     print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
 
+    // play game
     while (moves < MAX_MOVES && treasuresFound < MIN_TREASURE_COUNT)
     {
         turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
