@@ -1,0 +1,21 @@
+me:
+void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){ char move; scanf("%c", &move); // check for invalid input switch (move){ case 'D': if (*playerrow < GRID_SIZE - 1){ // cant move down if at bottom of grid *playerrow++; *moves++; } break; case 'U': if (*playerrow > 0){ // cant move up if at top of grid *playerrow--; *moves++; } break; case 'L': if (*playercol > 0){ // cant move left if at left of grid *playercol--; *moves++; } break; case 'R': if (*playercol < GRID_SIZE - 1){ // cant move right if at right of grid *playercol++; *moves++; } break; default: printf("Invalid move\n"); break; } if (grid[*playerrow][*playercol] == 'T'){ *treasuresFound++; grid[*playerrow][*playercol] = '_'; } } *treasureFound++not increasing
+
+github_copilot:
+The issue might be due to the fact that the *treasuresFound++ line is only executed when the current grid cell contains a 'T'. If the player never moves to a cell containing a 'T', *treasuresFound will never increase.
+
+If *treasuresFound is not increasing even when the player moves to a cell containing a 'T', then there might be an issue with how the grid is initialized or how the player's moves are being processed.
+
+Here are a few things you can check:
+
+Check the grid initialization: Make sure that there are cells in the grid that are initialized with 'T'. You can do this by printing the grid before the game starts.
+
+Check the player's moves: Make sure that the player's row and column are being updated correctly when they make a move. You can do this by printing the player's row and column after each move.
+
+Check the condition for increasing *treasuresFound: Make sure that the condition grid[*playerrow][*playercol] == 'T' is true when it should be. You can do this by adding a print statement inside the if statement, like this:
+
+if (grid[*playerrow][*playercol] == 'T'){
+    printf("Treasure found!\n");
+    *treasuresFound++;
+    grid[*playerrow][*playercol] = '_';
+}
