@@ -14,8 +14,7 @@ typedef struct {
 
 // Function prototypes
 void initializeSmartHome(SmartHomeState *state);
-void updateLighting(SmartHomeState *state, bool lamp1, bool lamp2, bool lamp3, int dimmerA, int
-dimmerB);
+void updateLighting(SmartHomeState *state, bool lamp1, bool lamp2, bool lamp3, int dimmerA, int dimmerB);
 void updateTemperature(SmartHomeState *state, int temperature);
 void printSmartHomeState(const SmartHomeState *state);
 void drawRoom(const SmartHomeState *state);
@@ -45,5 +44,33 @@ int main() {
 
     return 0;
 }
-
+// for int x temperture = x-1, dimmerA = x-1, dimmerB = 5-x, 
 // insert functions from prototype
+
+void initializeSmartHome(SmartHomeState *state){
+    state->lamp1 = false;
+    state->lamp2 = false;
+    state->lamp3 = false;
+    state->dimmerALevel = 0;
+    state->dimmerBLevel = 0;
+    state->temperatureRoomLevel = 0;
+}
+
+void updateLighting(SmartHomeState *state, bool lamp1, bool lamp2, bool lamp3, int dimmerA, int dimmerB){
+    state->lamp1 = lamp1;
+    state->lamp2 = lamp2;
+    state->lamp3 = lamp3;
+    state->dimmerALevel = dimmerA;
+    state->dimmerBLevel = dimmerB;
+}
+
+void updateTemperature(SmartHomeState *state, int temperature){
+    state->temperatureRoomLevel = temperature;
+}
+
+void printSmartHomeState(const SmartHomeState *state){
+    printf("Room State:\n");
+    printf("Lamps: 1[%s] 2[%s] 3[%s]\n", state->lamp1 ? "ON" : "OFF", state->lamp2 ? "ON" : "OFF", state->lamp3 ? "ON" : "OFF");
+    printf("Dimmer Levels: A[%d] B[%d]\n", state->dimmerALevel, state->dimmerBLevel);
+    printf("Temperature: %d°C\n", state->temperatureRoomLevel); 
+}
