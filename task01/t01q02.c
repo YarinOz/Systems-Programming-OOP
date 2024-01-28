@@ -3,37 +3,37 @@
 
 #define MAX_FLOORS 10
 
-void num_map(int floorNumber){
+void num_map(int floorNumber, char Floors[MAX_FLOORS][10]){
     switch (floorNumber) {
         case 0:
-            printf("You requested to go to the Zeroth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[0]);
             break;
         case 1:
-            printf("You requested to go to the First floor\n");
+            printf("You requested to go to the %s floor\n", Floors[1]);
             break;
         case 2:
-            printf("You requested to go to the Second floor\n");
+            printf("You requested to go to the %s floor\n", Floors[2]);
             break;
         case 3:
-            printf("You requested to go to the Third floor\n");
+            printf("You requested to go to the %s floor\n", Floors[3]);
             break;
         case 4:
-            printf("You requested to go to the Fourth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[4]);
             break;
         case 5:
-            printf("You requested to go to the Fifth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[5]);
             break;
         case 6:
-            printf("You requested to go to the Sixth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[6]);
             break;
         case 7:
-            printf("You requested to go to the Seventh floor\n");
+            printf("You requested to go to the %s floor\n", Floors[7]);
             break;
         case 8:
-            printf("You requested to go to the Eighth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[8]);
             break;
         case 9:
-            printf("You requested to go to the Ninth floor\n");
+            printf("You requested to go to the %s floor\n", Floors[9]);
             break;
         default:
             printf("You requested to go to the Number is out of range.\n");
@@ -61,12 +61,13 @@ void elevator(int currentFloor, int nextFloor){
 int main(int argc, char *argv[]){
     int currentFloor = 0;
     float nextFloor;
+    char Floors[MAX_FLOORS][10] = {"Zeroth", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth"};
     printf("Elevator is currently at floor: %d\n", currentFloor);
     while (1){
         printf("Enter the floor number you wish to go to (-1 to exit): \n");
         // int result = scanf("%d", &nextFloor);
         int result = scanf("%f", &nextFloor);
-        num_map(nextFloor);
+        num_map(nextFloor, Floors);
         if (nextFloor == -1){
             break;
         }
