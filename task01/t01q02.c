@@ -8,41 +8,6 @@ void num_map(int floorNumber, char Floors[MAX_FLOORS][10]){
         printf("You requested to go to the Number is out of range.\n");
     }else
         printf("You requested to go to the %s floor\n", Floors[floorNumber]);
-    
-    // switch (floorNumber) {
-    //     case 0:
-    //         printf("You requested to go to the %s floor\n", Floors[0]);
-    //         break;
-    //     case 1:
-    //         printf("You requested to go to the %s floor\n", Floors[1]);
-    //         break;
-    //     case 2:
-    //         printf("You requested to go to the %s floor\n", Floors[2]);
-    //         break;
-    //     case 3:
-    //         printf("You requested to go to the %s floor\n", Floors[3]);
-    //         break;
-    //     case 4:
-    //         printf("You requested to go to the %s floor\n", Floors[4]);
-    //         break;
-    //     case 5:
-    //         printf("You requested to go to the %s floor\n", Floors[5]);
-    //         break;
-    //     case 6:
-    //         printf("You requested to go to the %s floor\n", Floors[6]);
-    //         break;
-    //     case 7:
-    //         printf("You requested to go to the %s floor\n", Floors[7]);
-    //         break;
-    //     case 8:
-    //         printf("You requested to go to the %s floor\n", Floors[8]);
-    //         break;
-    //     case 9:
-    //         printf("You requested to go to the %s floor\n", Floors[9]);
-    //         break;
-    //     default:
-    //         printf("You requested to go to the Number is out of range.\n");
-    // }
 }
 
 void elevator(int currentFloor, int nextFloor){
