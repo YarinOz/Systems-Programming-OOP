@@ -17,3 +17,7 @@ Compile+Run q03:
     gcc -o t01q03.out t01q03.c
     ./t01q03.out
     ./t01q03.out < SelfTesting/input03.txt > myOutput03.txt
+
+note to self: 
+    In question1 when compiling and running on mac-os srand and rand behave different and result in different grid and player position.
+    Run and compile on linux env to achieve expected results.
