@@ -16,7 +16,6 @@ void grid_init(char grid[GRID_SIZE][GRID_SIZE]){
 }
 
 void treasure_init(char grid[GRID_SIZE][GRID_SIZE]){
-    srand(2024);
     int treasuresPlaced = 0;
     while (treasuresPlaced < TREASURE_COUNT){
         int randrow = rand() % GRID_SIZE;
@@ -29,7 +28,6 @@ void treasure_init(char grid[GRID_SIZE][GRID_SIZE]){
 }
 
 void Player_init(int* playerrow, int* playercol){ 
-    srand(2024);
     *playerrow = rand() % GRID_SIZE;
     *playercol = rand() % GRID_SIZE;
 }
@@ -102,6 +100,7 @@ int main(int argc, char *argv[]){
 
     int playercol, playerrow, moves = 0, treasuresFound = 0;
     char grid[GRID_SIZE][GRID_SIZE];
+    srand(2024);    // seed random number generator (we use same seed to get same results)
 
     // initialize grid, treasures, and player
     grid_init(grid);

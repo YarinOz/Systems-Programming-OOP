@@ -3,41 +3,11 @@
 
 #define MAX_FLOORS 10
 
-void num_map(int floorNumber){
-    switch (floorNumber) {
-        case 0:
-            printf("You requested to go to the Zeroth floor\n");
-            break;
-        case 1:
-            printf("You requested to go to the First floor\n");
-            break;
-        case 2:
-            printf("You requested to go to the Second floor\n");
-            break;
-        case 3:
-            printf("You requested to go to the Third floor\n");
-            break;
-        case 4:
-            printf("You requested to go to the Fourth floor\n");
-            break;
-        case 5:
-            printf("You requested to go to the Fifth floor\n");
-            break;
-        case 6:
-            printf("You requested to go to the Sixth floor\n");
-            break;
-        case 7:
-            printf("You requested to go to the Seventh floor\n");
-            break;
-        case 8:
-            printf("You requested to go to the Eighth floor\n");
-            break;
-        case 9:
-            printf("You requested to go to the Ninth floor\n");
-            break;
-        default:
-            printf("You requested to go to the Number is out of range.\n");
-    }
+void num_map(int floorNumber, char Floors[MAX_FLOORS][10]){
+    if (floorNumber < 0 || floorNumber > MAX_FLOORS){
+        printf("You requested to go to the Number is out of range.\n");
+    }else
+        printf("You requested to go to the %s floor\n", Floors[floorNumber]);
 }
 
 void elevator(int currentFloor, int nextFloor){
@@ -61,12 +31,13 @@ void elevator(int currentFloor, int nextFloor){
 int main(int argc, char *argv[]){
     int currentFloor = 0;
     float nextFloor;
+    char Floors[MAX_FLOORS][10] = {"Zeroth", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth"};
     printf("Elevator is currently at floor: %d\n", currentFloor);
     while (1){
         printf("Enter the floor number you wish to go to (-1 to exit): \n");
         // int result = scanf("%d", &nextFloor);
         int result = scanf("%f", &nextFloor);
-        num_map(nextFloor);
+        num_map(nextFloor, Floors);
         if (nextFloor == -1){
             break;
         }

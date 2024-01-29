@@ -17,3 +17,16 @@ Compile+Run q03:
     gcc -o t01q03.out t01q03.c
     ./t01q03.out
     ./t01q03.out < SelfTesting/input03.txt > myOutput03.txt
+
+note to self: 
+    In question1 when compiling and running on mac-os srand and rand behave different and result in different grid and player position.
+    Run and compile on linux env to achieve expected results.
+
+
+notes from Yoram:
+
+    1. gcc warning flags compiling
+    2. q1: max_moves = 10, rand order(tresure location(row,coll)), need to find all treasures (6) (remove min_treas)
+    3. when input not (aside from yorams inputs) valid exit program and print error in sec.4. 
+    4. submition in format: qxx.c, gpt.txt (all 3)
+    5. q3: dimmerA lamp1,lamp2 ; dimmerB lamp3  , translate char to int in input.
