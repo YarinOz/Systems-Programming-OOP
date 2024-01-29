@@ -34,10 +34,11 @@ int main(int argc, char *argv[]){
     char Floors[MAX_FLOORS][10] = {"Zeroth", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth"};
     printf("Elevator is currently at floor: %d\n", currentFloor);
     while (1){
-        printf("Enter the floor number you wish to go to (-1 to exit): \n");
+        printf("Enter the floor number you wish to go to (-1 to exit): ");
         // int result = scanf("%d", &nextFloor);
         int result = scanf("%f", &nextFloor);
         num_map(nextFloor, Floors);
+
         if (nextFloor == -1){
             break;
         }
@@ -48,9 +49,13 @@ int main(int argc, char *argv[]){
             while ((c = getchar()) != '\n' && c != EOF) { }  // Clear input buffer
             continue;
         
-        } else if (nextFloor < 0 || nextFloor > MAX_FLOORS || nextFloor - (int)nextFloor != 0) { // Check if 0>input or input>10 or is not an integer
+        } else if (nextFloor - (int)nextFloor != 0) {       // Exit if input is not an integer
+            printf("\nMyERROR: An illegal operation was performed, so I have to stop the program.\n");
+            break ;
+        } else if (nextFloor < 0 || nextFloor > MAX_FLOORS){  // Skip if input is out of range
             printf("\nInvalid floor number.\n");
-            continue;}
+            continue;
+        }
         ////////////////////////////////////////////////////////////////////////////////////////////
         nextFloor = (int)nextFloor;
         elevator(currentFloor, nextFloor);

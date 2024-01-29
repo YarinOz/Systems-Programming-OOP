@@ -74,3 +74,59 @@ void printSmartHomeState(const SmartHomeState *state){
     printf("Dimmer Levels: A[%d] B[%d]\n", state->dimmerALevel, state->dimmerBLevel);
     printf("Temperature: %d°C\n", state->temperatureRoomLevel); 
 }
+// new function (test needed)
+void getSimCode(int arr[]) {
+    char input[6];  // Array to hold the input string
+
+    printf("Simulation senario code: Enter Five digits without spaces (1-5): ");
+    scanf("%5s", input);  // Read a string of 5 characters
+
+    for (int i = 0; i < 5; i++) {
+        if (input[i] >= '1' && input[i] <= '5') {  // Check if the character is a digit between 1 and 5
+            arr[i] = input[i] - '0';  // Convert the character to an integer
+        } else {
+            printf("Invalid input. Please enter digits from 1 to 5 only.\n");
+            return;
+        }
+    }
+}
+
+void drawRoom(const SmartHomeState *state){
+    char brightnessA[5] = "", brightnessB[5] = "", temperature[10] = "";
+
+    for (int i = 0; i < state->dimmerALevel; i++){
+        brightnessA[i] = '*';
+    }
+    brightnessA[state->dimmerALevel] = '\0';  // Terminate the string
+
+    for (int i = 0; i < state->dimmerBLevel; i++){
+        brightnessB[i] = '*';
+    }
+    brightnessA[state->dimmerALevel] = '\0';  // Terminate the string
+
+    for (int i = 0; i < state->temperatureRoomLevel; i++){
+        temperature[i] = '-';
+    }
+
+    if (state->lamp1 == false){  // if lamp1 is off
+        printf("Lamp 1: -\n");
+    }
+    else{
+        printf("Lamp 1: *%s\n", brightnessA);
+    }
+
+    if (state->lamp2 == false){  // if lamp2 is off
+        printf("Lamp 2: -\n");
+    }
+    else{
+        printf("Lamp 2: *%s\n", brightnessA);
+    }
+
+    if (state->lamp3 == false){  // if lamp3 is off
+        printf("Lamp 3: -\n");
+    }
+    else{
+        printf("Lamp 3: *%s\n", brightnessB);
+    }
+    printf("Temperature: -%s\n", temperature);
+}

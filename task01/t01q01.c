@@ -4,8 +4,7 @@
 
 #define GRID_SIZE 3
 #define TREASURE_COUNT 6
-#define MIN_TREASURE_COUNT 5
-#define MAX_MOVES 20
+#define MAX_MOVES 10
 
 void grid_init(char grid[GRID_SIZE][GRID_SIZE]){
     for (int i = 0; i < GRID_SIZE; i++){
@@ -43,7 +42,7 @@ void print_turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol,
             printf("\n");
         }
     printf("\nmoves = %d Treasures Found = %d\n\n", *moves, *treasuresFound);
-    printf("Enter move (D/L/U/R):\n");
+    printf("Enter move (D/L/U/R):");
 }
 
 void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){
@@ -111,14 +110,14 @@ int main(int argc, char *argv[]){
     print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
 
     // play game
-    while (moves < MAX_MOVES && treasuresFound < MIN_TREASURE_COUNT)
+    while (moves < MAX_MOVES && treasuresFound < TREASURE_COUNT)
     {
         turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
         print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
     }
     
 
-    if (treasuresFound >= MIN_TREASURE_COUNT){
+    if (treasuresFound == TREASURE_COUNT){
         printf("\nCongratulations! You found all the treasures.\n");
         printf("You took %d moves.\n", moves);}
     else
