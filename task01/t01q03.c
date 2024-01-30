@@ -79,14 +79,18 @@ void getSimCode(int arr[]) {
     char input[6];  // Array to hold the input string
 
     printf("Simulation senario code: Enter Five digits without spaces (1-5): ");
-    scanf("%5s", input);  // Read a string of 5 characters
+    scanf("%6s", input);  // Read a string of 5 characters
+
+    if (input[5] != '\0'){      // Check if the input is longer than 5 characters
+        printf("Invalid input. Please enter a 5 digit code only.\n");
+        return;}
 
     for (int i = 0; i < 5; i++) {
         if (input[i] >= '1' && input[i] <= '5') {  // Check if the character is a digit between 1 and 5
             arr[i] = input[i] - '0';  // Convert the character to an integer
-        } else {
+        }else {
             printf("Invalid input. Please enter digits from 1 to 5 only.\n");
-            return;
+            continue;
         }
     }
 }
