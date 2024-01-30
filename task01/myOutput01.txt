@@ -1,3 +1,4 @@
+
 T _ T 
 _ T _ 
 P T T 
@@ -62,5 +63,21 @@ moves = 8 Treasures Found = 5
 
 Enter move (D/L/U/R):
 
-Congratulations! You found all the treasures.
-You took 8 moves.
+Invalid move
+_ _ _ 
+_ T _ 
+P _ _ 
+
+moves = 9 Treasures Found = 5
+
+Enter move (D/L/U/R):
+
+Invalid move
+_ _ _ 
+_ T _ 
+P _ _ 
+
+moves = 10 Treasures Found = 5
+
+Enter move (D/L/U/R):
+Sorry, you ran out of moves.

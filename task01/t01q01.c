@@ -42,47 +42,57 @@ void print_turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol,
             printf("\n");
         }
     printf("\nmoves = %d Treasures Found = %d\n\n", *moves, *treasuresFound);
-    printf("Enter move (D/L/U/R):");
+    printf("Enter move (D/L/U/R):\n");
 }
 
 void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* moves, int* treasuresFound){
-    char move;
-    scanf(" %c", &move);  // check for invalid input
-    switch (move){
+    char move[3];     // buffer size [char, \n, \0] flags
+    fgets(move, sizeof(move), stdin); // Scan for input
+
+    if (move[1] != '\n'){  // check for invalid input
+        printf("\nMyERROR: An illegal operation was performed, so I have to stop the program.\n");
+        exit(1);
+    }
+    switch (move[0]){
         case 'D':
-            if ((*playerrow) <= GRID_SIZE - 1){  // cant move down if at bottom of grid
+            if ((*playerrow) < (GRID_SIZE - 1)){  // cant move down if at bottom of grid
                 (*playerrow)++;
                 (*moves)++;
             }
-            else
+            else{
                 printf("\nInvalid move\n");
+                (*moves)++;}
             break;
         case 'U':
             if ((*playerrow) > 0){  // cant move up if at top of grid
                 (*playerrow)--;
                 (*moves)++;
             }
-            else
+            else{
                 printf("\nInvalid move\n"); 
+                (*moves)++;}
             break;
         case 'L':
             if ((*playercol) > 0){  // cant move left if at left of grid
                 (*playercol)--;
                 (*moves)++;
             }
-            else
+            else{
                 printf("\nInvalid move\n");
+                (*moves)++;}
             break;
         case 'R':
-            if ((*playercol) <= GRID_SIZE - 1){  // cant move right if at right of grid
+            if ((*playercol) < (GRID_SIZE - 1)){  // cant move right if at right of grid
                 (*playercol)++;
                 (*moves)++;
             }
-            else
+            else{
                 printf("\nInvalid move\n");
+                (*moves)++;}
             break;
         default:
             printf("\nInvalid move\n");
+            (*moves)++;
             break;
     }
     if (grid[*playerrow][*playercol] == 'T'){
@@ -91,13 +101,10 @@ void turn(char grid[GRID_SIZE][GRID_SIZE], int* playerrow, int* playercol, int* 
     }
 }
 
-// on invalid move, print "Invalid move" and do not increment treasurefound if spawnd on treasure (mail le rami)
-// on testing extra print with 9 moves with 8 moves in fact, wins 5 treausres but sais ran out of moves
-// does input consider white key as a valid input? (mail le rami)
 
 int main(int argc, char *argv[]){
 
-    int playercol, playerrow, moves = 0, treasuresFound = 0;
+    int playercol, playerrow, moves = 0, treasuresFound = 0, c;
     char grid[GRID_SIZE][GRID_SIZE];
     srand(2024);    // seed random number generator (we use same seed to get same results)
 
@@ -107,6 +114,7 @@ int main(int argc, char *argv[]){
     Player_init(&playerrow, &playercol);
 
     // print initial grid
+    printf("\n");
     print_turn(grid, &playerrow, &playercol, &moves, &treasuresFound);
 
     // play game
@@ -118,9 +126,9 @@ int main(int argc, char *argv[]){
     
 
     if (treasuresFound == TREASURE_COUNT){
-        printf("\nCongratulations! You found all the treasures.\n");
+        printf("Congratulations! You found all the treasures.\n");
         printf("You took %d moves.\n", moves);}
     else
-        printf("\nSorry, you ran out of moves.\n");
+        printf("Sorry, you ran out of moves.\n");
     return 0;
 }
