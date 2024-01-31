@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include <unistd.h> //For sleep function
 
+// Itamar Meir 208536888; Yarin Oziel 319149878
+
 // Define a structure for the smart home state
 typedef struct {
     bool lamp1;

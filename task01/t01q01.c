@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+// Itamar Meir 208536888; Yarin Oziel 319149878
+
 #define GRID_SIZE 3
 #define TREASURE_COUNT 6
 #define MAX_MOVES 10
