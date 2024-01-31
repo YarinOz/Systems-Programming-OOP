@@ -18,7 +18,7 @@ void updateLighting(SmartHomeState *state, bool lamp1, bool lamp2, bool lamp3, i
 void updateTemperature(SmartHomeState *state, int temperature);
 void printSmartHomeState(const SmartHomeState *state);
 void drawRoom(const SmartHomeState *state);
-bool isValidInput(char d);
+bool isValidInput(char d);     
 void getSimCode(int arr[]);
 
 int main() {
@@ -78,20 +78,40 @@ void printSmartHomeState(const SmartHomeState *state){
 void getSimCode(int arr[]) {
     char input[6];  // Array to hold the input string
 
-    printf("Simulation senario code: Enter Five digits without spaces (1-5): ");
-    scanf("%6s", input);  // Read a string of 5 characters
+    while (1) {
+        printf("Simulation senario code: Enter Five digits without spaces (1-5): ");
+        scanf("%6s", input);  // Read a string of 5 characters
 
-    if (input[5] != '\0'){      // Check if the input is longer than 5 characters
-        printf("Invalid input. Please enter a 5 digit code only.\n");
-        return;}
-
-    for (int i = 0; i < 5; i++) {
-        if (input[i] >= '1' && input[i] <= '5') {  // Check if the character is a digit between 1 and 5
-            arr[i] = input[i] - '0';  // Convert the character to an integer
-        }else {
-            printf("Invalid input. Please enter digits from 1 to 5 only.\n");
+        if (input[5] != '\0'){      // Check if the input is longer than 5 characters
+            printf("Invalid input. Please enter a 5 digit code only.\n");
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { }  // Clear input buffer
             continue;
         }
+        else if (isValidInput(input[0]) && isValidInput(input[1]) && isValidInput(input[2]) &&isValidInput(input[3]) &&isValidInput(input[4])){ 
+            break;
+            }else {
+            printf("Invalid input. Please enter digits from 1 to 5 only.\n");
+        }
+        // for (int i = 0; i < 5; i++) {
+        //     if (isValidInput(input[i])) {  // Check if the character is a digit between 1 and 5
+        //         arr[i] = input[i] - '0';  // Convert the character to an integer
+        //     }else {
+        //         printf("Invalid input. Please enter digits from 1 to 5 only.\n");
+        //         continue;
+        //     }
+        // }
+    }
+    for (int i = 0; i < 5; i++) {
+        arr[i] = input[i] - '0';  // Convert the character to an integer
+    }
+}
+
+bool isValidInput(char d) {
+    if (d >= '1' && d <= '5') {  // Check if the character is a digit between 1 and 5
+        return true;
+    }else {
+        return false;
     }
 }
 
