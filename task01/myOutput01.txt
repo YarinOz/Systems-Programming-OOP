@@ -6,14 +6,78 @@ P T T
 moves = 0 Treasures Found = 0
 
 Enter move (D/L/U/R):
-
-Invalid move
 T _ T 
-_ T _ 
-P T T 
+P T _ 
+T T T 
 
-moves = 1 Treasures Found = 1
+moves = 1 Treasures Found = 0
+
+Enter move (D/L/U/R):
+P _ T 
+_ T _ 
+T T T 
+
+moves = 2 Treasures Found = 1
+
+Enter move (D/L/U/R):
+_ P T 
+_ T _ 
+T T T 
+
+moves = 3 Treasures Found = 1
+
+Enter move (D/L/U/R):
+_ _ P 
+_ T _ 
+T T T 
+
+moves = 4 Treasures Found = 2
+
+Enter move (D/L/U/R):
+_ _ _ 
+_ T P 
+T T T 
+
+moves = 5 Treasures Found = 2
+
+Enter move (D/L/U/R):
+_ _ _ 
+_ T _ 
+T T P 
+
+moves = 6 Treasures Found = 3
+
+Enter move (D/L/U/R):
+_ _ _ 
+_ T _ 
+T P _ 
+
+moves = 7 Treasures Found = 4
+
+Enter move (D/L/U/R):
+_ _ _ 
+_ T _ 
+P _ _ 
+
+moves = 8 Treasures Found = 5
 
 Enter move (D/L/U/R):
 
-MyERROR: An illegal operation was performed, so I have to stop the program.
+Invalid move
+_ _ _ 
+_ T _ 
+P _ _ 
+
+moves = 9 Treasures Found = 5
+
+Enter move (D/L/U/R):
+
+Invalid move
+_ _ _ 
+_ T _ 
+P _ _ 
+
+moves = 10 Treasures Found = 5
+
+Enter move (D/L/U/R):
+Sorry, you ran out of moves.

@@ -7,7 +7,7 @@ void num_map(int floorNumber, char Floors[MAX_FLOORS][10]){
     if (floorNumber < 0 || floorNumber > MAX_FLOORS){
         printf("\nYou requested to go to the Number is out of range.\n");
     }else
-        printf("You requested to go to the %s floor\n", Floors[floorNumber]);
+        printf("\nYou requested to go to the %s floor\n", Floors[floorNumber]);
 }
 
 void elevator(int currentFloor, int nextFloor){
@@ -46,6 +46,7 @@ int main(int argc, char *argv[]){
             printf("\nMyERROR: An illegal operation was performed, so I have to stop the program.\n");
             break ;
         } else if (nextFloor < 0 || nextFloor > MAX_FLOORS){  // Skip if input is out of range
+            printf("\nYou requested to go to the Number is out of range.\n");
             printf("\nInvalid floor number.\n");
             continue;
         }
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]){
         currentFloor = nextFloor;
     }
 
-    printf("Elevator simulation ended.\n");
+    printf("\nElevator simulation ended.\n");
     
     return 0;
 }

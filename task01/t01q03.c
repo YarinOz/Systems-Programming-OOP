@@ -79,7 +79,7 @@ void getSimCode(int arr[]) {
     char input[6];  // Array to hold the input string
 
     while (1) {
-        printf("Simulation senario code: Enter Five digits without spaces (1-5): ");
+        printf("Simulation senario code: Enter Five digits without spaces (1-5): \n");
         scanf("%6s", input);  // Read a string of 5 characters
 
         if (input[5] != '\0'){      // Check if the input is longer than 5 characters

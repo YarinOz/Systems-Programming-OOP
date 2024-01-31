@@ -47,5 +47,4 @@ Enter the floor number you wish to go to (-1 to exit):
 You requested to go to the Zeroth floor
 Arrived at Floor 0
 Enter the floor number you wish to go to (-1 to exit): 
-You requested to go to the Number is out of range.
 Elevator simulation ended.

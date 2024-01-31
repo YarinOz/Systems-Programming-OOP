@@ -1,0 +1,43 @@
+Simulation senario code: Enter Five digits without spaces (1-5): 
+Invalid input. Please enter a 5 digit code only.
+Simulation senario code: Enter Five digits without spaces (1-5): 
+Room State:
+Lamps: 1[ON] 2[ON] 3[ON]
+Dimmer Levels: A[0] B[4]
+Temperature: 0°C
+Lamp 1: *
+Lamp 2: *
+Lamp 3: *****
+Temperature: -
+Room State:
+Lamps: 1[ON] 2[OFF] 3[OFF]
+Dimmer Levels: A[1] B[3]
+Temperature: 1°C
+Lamp 1: **
+Lamp 2: -
+Lamp 3: -
+Temperature: --
+Room State:
+Lamps: 1[ON] 2[ON] 3[OFF]
+Dimmer Levels: A[2] B[2]
+Temperature: 2°C
+Lamp 1: ***
+Lamp 2: ***
+Lamp 3: -
+Temperature: ---
+Room State:
+Lamps: 1[ON] 2[OFF] 3[ON]
+Dimmer Levels: A[3] B[1]
+Temperature: 3°C
+Lamp 1: ****
+Lamp 2: -
+Lamp 3: **
+Temperature: ----
+Room State:
+Lamps: 1[ON] 2[ON] 3[OFF]
+Dimmer Levels: A[0] B[0]
+Temperature: 4°C
+Lamp 1: *
+Lamp 2: *
+Lamp 3: -
+Temperature: -----
