@@ -63,21 +63,4 @@ moves = 8 Treasures Found = 5
 
 Enter move (D/L/U/R):
 
-Invalid move
-_ _ _ 
-_ T _ 
-P _ _ 
-
-moves = 9 Treasures Found = 5
-
-Enter move (D/L/U/R):
-
-Invalid move
-_ _ _ 
-_ T _ 
-P _ _ 
-
-moves = 10 Treasures Found = 5
-
-Enter move (D/L/U/R):
-Sorry, you ran out of moves.
+MyERROR: An illegal operation was performed, so I have to stop the program.

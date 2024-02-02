@@ -127,10 +127,9 @@ int main(int argc, char *argv[]){
     }
     
 
-    if (treasuresFound == TREASURE_COUNT){
-        printf("Congratulations! You found all the treasures.\n");
-        printf("You took %d moves.\n", moves);}
+    if (treasuresFound >= TREASURE_COUNT){
+        printf("Congratulations! You found all the treasures in %d.\n", moves-1);}
     else
-        printf("Sorry, you ran out of moves.\n");
+        printf("Sorry, you ran out of moves. You used %d moves\n", moves-1);
     return 0;
 }
