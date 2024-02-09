@@ -4,13 +4,13 @@
 
 /**************************************************************************************************/
 /***************************YOU MUST REMARK IT BEFORE SUBMISSION***********************************/
-// #define DEBUGON
+#define DEBUGON
 /***************************YOU MUST REMARK IT BEFORE SUBMISSION***********************************/
 /**************************************************************************************************/
 
 /* Submitters
-Name1: Privetname Familyname     ID: xxxxxxxx
-Name2: Privetname Familyname     ID: xxxxxxxx
+Name1: Yarin Oziel     ID: 319149878
+Name2: Itamar Meir     ID: 208536888
 */
 
 
@@ -52,7 +52,119 @@ typedef struct wlst {
 
 
 /*****************************************new objects and insert object functions******************************************************/
+void insert_item(itemlst** items, item* new_item) {
+    itemlst* new_node = (itemlst*)malloc(sizeof(itemlst));
+    new_node->data = new_item;
+    new_node->next = *items;
+    *items = new_node;
+}
 
+void insert_warehouse(wlst** warehouses, warehouse* new_warehouse) {
+    wlst* new_node = (wlst*)malloc(sizeof(wlst));
+    new_node->data = new_warehouse;
+    new_node->next = *warehouses;
+    *warehouses = new_node;
+}
+item* find_item(itemlst* items, int id) {
+    while (items) {
+        if (items->data->id == id) {
+            return items->data;
+        }
+        items = items->next;
+    }
+    return NULL;
+}
+
+warehouse* find_warehouse(wlst* warehouses, int code) {
+    while (warehouses) {
+        if (warehouses->data->code == code) {
+            return warehouses->data;
+        }
+        warehouses = warehouses->next;
+    }
+    return NULL;
+}
+
+void assign_item_to_warehouse(item* item, warehouse* warehouse) {
+    wlst* new_node = (wlst*)malloc(sizeof(wlst));
+    new_node->data = warehouse;
+    new_node->next = item->warehouses;
+    item->warehouses = new_node;
+}
+
+void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
+    wlst** current = &(item->warehouses);
+    while (*current) {
+        if ((*current)->data == warehouse) {
+            wlst* next = (*current)->next;
+            free(*current);
+            *current = next;
+        } else {
+            current = &((*current)->next);
+        }
+    }
+}
+
+void print_items(itemlst* items) {
+    while (items) {
+        printf("Item name: %s, ID: %d\n", items->data->name, items->data->id);
+        items = items->next;
+    }
+}
+
+void free_items(itemlst* items) {
+    while (items) {
+        itemlst* next = items->next;
+        free(items->data->name);
+        free(items->data);
+        free(items);
+        items = next;
+    }
+}
+
+void free_warehouses(wlst* warehouses) {
+    while (warehouses) {
+        wlst* next = warehouses->next;
+        free(warehouses->data->location);
+        free(warehouses->data);
+        free(warehouses);
+        warehouses = next;
+    }
+}
+
+int gen_100_10(itemlst** items, wlst** warehouses) {
+    srand(1948);
+
+    // Create 10 warehouses
+    for (int i = 0; i < 10; i++) {
+        char location[10];
+        sprintf(location, "warehouse%d", i);
+        warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
+        new_warehouse->location = (char*)malloc(strlen(location) + 1);
+        strcpy(new_warehouse->location, location);
+        new_warehouse->code = i;
+        new_warehouse->items = 0;
+        insert_warehouse(warehouses, new_warehouse);
+    }
+
+    // Create 100 items and assign them to warehouses
+    for (int i = 0; i < 100; i++) {
+        char name[10];
+        sprintf(name, "item%d", i);
+        item* new_item = (item*)malloc(sizeof(item));
+        new_item->name = (char*)malloc(strlen(name) + 1);
+        strcpy(new_item->name, name);
+        new_item->id = i;
+        new_item->warehouses = 0;
+        insert_item(items, new_item);
+
+        // Assign the item to a warehouse
+        warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
+        assign_item_to_warehouse(new_item, warehouse_to_assign);
+    }
+
+    return 0;
+}
 
 
 /****************************************find Matchings and register item to Warehouse*************************************************/
