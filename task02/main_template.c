@@ -54,7 +54,7 @@ void print_items(itemlst* items);
 void print_warehouse(wlst* warehouses);
 void free_items(itemlst* items);
 void free_warehouses(wlst* warehouses);
-int gen_100_10(itemlst** items, wlst** warehouses);
+void gen_100_10(itemlst** items, wlst** warehouses);
 /******************************************* your's functions ********************************************************************************/
 
 /*****************************************new objects and insert object functions******************************************************/
@@ -216,39 +216,37 @@ void free_warehouses(wlst* warehouses) {
 }
 
 /*******************************************Generate And Assign Items And Warehouses******************************************************/
-// int gen_100_10(itemlst** items, wlst** warehouses) {
-//     srand(1948);
+void gen_100_10(itemlst** items, wlst** warehouses) {
+    srand(1948);
 
-//     // Create 10 warehouses
-//     for (int i = 0; i < 10; i++) {
-//         char location[10];
-//         sprintf(location, "warehouse%d", i);
-//         warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
-//         new_warehouse->name = (char*)malloc(strlen(location) + 1);
-//         strcpy(new_warehouse->name, location);
-//         new_warehouse->code = i;
-//         new_warehouse->items = 0;
-//         insert_warehouse(warehouses, new_warehouse);
-//     }
+    // Create 10 warehouses
+    for (int i = 0; i < 10; i++) {
+        char location[20];
+        sprintf(location, "warehouse%d", i);
+        warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
+        new_warehouse->name = (char*)malloc(strlen(location) + 1);
+        strcpy(new_warehouse->name, location);
+        new_warehouse->code = i;
+        new_warehouse->items = 0;
+        insert_warehouse(warehouses, new_warehouse);
+    }
 
-//     // Create 100 items and assign them to warehouses
-//     for (int i = 0; i < 100; i++) {
-//         char name[10];
-//         sprintf(name, "item%d", i);
-//         item* new_item = (item*)malloc(sizeof(item));
-//         new_item->name = (char*)malloc(strlen(name) + 1);
-//         strcpy(new_item->name, name);
-//         new_item->id = i;
-//         new_item->warehouses = 0;
-//         insert_item(items, new_item);
+    // Create 100 items and assign them to warehouses
+    for (int i = 0; i < 100; i++) {
+        char name[10];
+        sprintf(name, "item%d", i);
+        item* new_item = (item*)malloc(sizeof(item));
+        new_item->name = (char*)malloc(strlen(name) + 1);
+        strcpy(new_item->name, name);
+        new_item->id = i;
+        new_item->warehouses = 0;
+        insert_item(items, new_item);
 
-//         // Assign the item to a warehouse
-//         warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
-//         assign_item_to_warehouse(new_item, warehouse_to_assign);
-//     }
-
-//     return 0;
-// }
+        // Assign the item to a warehouse
+        warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
+        assign_item_to_warehouse(new_item, warehouse_to_assign);
+    }
+}
 /*******************************************Main Function**********************************************************************************/
 /*DO NOT TOUCH THIS FUNCTION */
 void getstring(char* buf, int length) {
@@ -404,7 +402,7 @@ int main() {
 			printf("Generating and assigning items to warehouses\n");
 		
 			//your function
-			
+            gen_100_10(&items, &warehouses);
 			break;
 
         case 'q':
