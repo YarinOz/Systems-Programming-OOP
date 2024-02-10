@@ -1,0 +1,107 @@
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Adding new item.
+item name: item ID: 
+ Add new item: name yarin item id: 1
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Adding new item.
+item name: item ID: 
+ Add new item: name mishmish item id: 2
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Adding new warehouse.
+
+ warehouse name: 
+ warehouse code: 
+ Add new warehouse: name ware1 warehouse code: 1
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Adding new warehouse.
+
+ warehouse name: 
+ warehouse code: 
+ Add new warehouse: name ware2 warehouse code: 2
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Assign an item to a warehouse.
+item ID: warehouse code: 
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Assign an item to a warehouse.
+item ID: warehouse code: 
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Assign an item to a warehouse.
+item ID: warehouse code: 
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Printing status.
+item LIST:
+1:yarin
+Item Warehouses: 1-ware1, 2-ware2
+2:mishmish
+Item Warehouses: 2-ware2
+warehouse LIST:
+Warehouse code 1, Warehouse name: ware1
+items: ID 1 Name yarin | 
+Warehouse code 2, Warehouse name: ware2
+items: ID 1 Name yarin | ID 2 Name mishmish | 
+
+Choose:
+    i - new item
+    w - new warehouse
+    a - assign an item to a warehouse
+    u - unassign an item from a warehouse(not delete!)
+    p - print status
+    g - generating and assigning 100 items to 10 warehouses
+    q - quit
+Quitting...

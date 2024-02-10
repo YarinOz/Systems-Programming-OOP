@@ -51,6 +51,7 @@ warehouse* find_warehouse(wlst* warehouses, int code);
 void assign_item_to_warehouse(item* item, warehouse* warehouse);
 void unassign_item_from_warehouse(item* item, warehouse* warehouse);
 void print_items(itemlst* items);
+void print_warehouse(wlst* warehouses);
 void free_items(itemlst* items);
 void free_warehouses(wlst* warehouses);
 int gen_100_10(itemlst** items, wlst** warehouses);
@@ -60,15 +61,33 @@ int gen_100_10(itemlst** items, wlst** warehouses);
 void insert_item(itemlst** items, item* new_item) {
     itemlst* new_node = (itemlst*)malloc(sizeof(itemlst));
     new_node->data = new_item;
-    new_node->next = *items;
-    *items = new_node;
+    new_node->next = NULL; // Set the next pointer of the new node to NULL
+
+    if (*items == NULL) {
+        *items = new_node; // If the list is empty, make the new node the head of the list
+    } else {
+        itemlst* current = *items;
+        while (current->next != NULL) {
+            current = current->next; // Traverse to the last node of the list
+        }
+        current->next = new_node; // Set the next pointer of the last node to the new node
+    }
 }
 
 void insert_warehouse(wlst** warehouses, warehouse* new_warehouse) {
     wlst* new_node = (wlst*)malloc(sizeof(wlst));
     new_node->data = new_warehouse;
-    new_node->next = *warehouses;
-    *warehouses = new_node;
+    new_node->next = NULL; // Set the next pointer of the new node to NULL
+
+    if (*warehouses == NULL) {
+        *warehouses = new_node; // If the list is empty, make the new node the head of the list
+    } else {
+        wlst* current = *warehouses;
+        while (current->next != NULL) {
+            current = current->next; // Traverse to the last node of the list
+        }
+        current->next = new_node; // Set the next pointer of the last node to the new node
+    }
 }
 
 /****************************************find Matchings and register item to Warehouse*************************************************/
@@ -93,10 +112,32 @@ warehouse* find_warehouse(wlst* warehouses, int code) {
 }
 
 void assign_item_to_warehouse(item* item, warehouse* warehouse) {
+    // Assign warehouse to item
     wlst* new_node = (wlst*)malloc(sizeof(wlst));
     new_node->data = warehouse;
-    new_node->next = item->warehouses;
-    item->warehouses = new_node;
+    new_node->next = NULL;
+    if (item->warehouses == NULL) {
+        item->warehouses = new_node;
+    } else {
+        wlst* current = item->warehouses;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+    // Assign item to warehouse
+    itemlst* new_item_node = (itemlst*)malloc(sizeof(itemlst));
+    new_item_node->data = item;
+    new_item_node->next = NULL;
+    if (warehouse->items == NULL) {
+        warehouse->items = new_item_node;
+    } else {
+        itemlst* current_item = warehouse->items;
+        while (current_item->next != NULL) {
+            current_item = current_item->next;
+        }
+        current_item->next = new_item_node;
+    }
 }
 
 /********************************************uregisters objects*************************************************************************/
@@ -115,9 +156,41 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
 
 /***********************************************printout functions***********************************************************************/
 void print_items(itemlst* items) {
+    printf("item LIST:\n");
     while (items) {
-        printf("Item name: %s, ID: %d\n", items->data->name, items->data->id);
+        printf("%d:%s\n", items->data->id, items->data->name);
+        wlst* wares = items->data->warehouses;
+        if (wares) {
+            printf("Item Warehouses: ");
+            // printf("None");
+        }
+        while (wares) {
+            printf("%d-%s", wares->data->code, wares->data->name);
+            if (wares->next != NULL) {
+                printf(", ");
+            }
+            wares = wares->next;
+        }
+        printf("\n");
         items = items->next;
+    }
+}
+
+void print_warehouse(wlst* warehouses) {
+    printf("warehouse LIST:\n");
+    while (warehouses) {
+        printf("Warehouse code %d, Warehouse name: %s\n", warehouses->data->code, warehouses->data->name);
+        itemlst* items = warehouses->data->items;
+        if (items) {
+            printf("items: ");
+            // printf("None");
+        }
+        while (items) {
+            printf("ID %d Name %s | ", items->data->id, items->data->name);
+            items = items->next;
+        }
+        printf("\n");
+        warehouses = warehouses->next;
     }
 }
 
@@ -244,6 +317,7 @@ int main() {
             }
             item* new_item = (item*)malloc(sizeof(item));
             new_item->name = (char*)malloc(strlen(buf) + 1);
+            strcpy(new_item->name, buf);
             new_item->id = id;
             insert_item(&items, new_item);
 
@@ -269,6 +343,7 @@ int main() {
             }
             warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
             new_warehouse->name = (char*)malloc(strlen(buf) + 1);
+            strcpy(new_warehouse->name, buf);
             new_warehouse->code = num;
             insert_warehouse(&warehouses, new_warehouse);
 
@@ -305,7 +380,15 @@ int main() {
             scanf("%d", &num);
 
            //your function
-
+            item* item_to_unassign = find_item(items, id);
+            warehouse* warehouse_to_unassign = find_warehouse(warehouses, num);
+            if (!item_to_unassign || !warehouse_to_unassign) {
+                #ifdef DEBUGON
+                printf("Item or warehouse not found\n");
+                #endif
+                break;
+            }
+            unassign_item_from_warehouse(item_to_unassign, warehouse_to_unassign);
             break;
 
         case 'p':
@@ -313,6 +396,7 @@ int main() {
 
             print_items(items);
             //your function
+            print_warehouse(warehouses);
 
             break;
 			
