@@ -23,13 +23,13 @@ Name2: Itamar Meir     ID: 208536888
 typedef struct item {
     char* name;
     int  id;
-    struct wlst* warehouses;
+    struct wlst* warehouses;    // item can be in multiple warehouses
 } item;
 
 typedef struct warehouse {
-    char* location;
+    char* name;
     int  code;
-    struct itemlst* items;
+    struct itemlst* items;    // warehouse can contain multiple items
 } warehouse;
 
 typedef struct itemlst {
@@ -44,12 +44,17 @@ typedef struct wlst {
 
 
 /******************************************* your's prototypes *******************************************************************************/
-
-
-
+void insert_item(itemlst** items, item* new_item);
+void insert_warehouse(wlst** warehouses, warehouse* new_warehouse);
+item* find_item(itemlst* items, int id);
+warehouse* find_warehouse(wlst* warehouses, int code);
+void assign_item_to_warehouse(item* item, warehouse* warehouse);
+void unassign_item_from_warehouse(item* item, warehouse* warehouse);
+void print_items(itemlst* items);
+void free_items(itemlst* items);
+void free_warehouses(wlst* warehouses);
+int gen_100_10(itemlst** items, wlst** warehouses);
 /******************************************* your's functions ********************************************************************************/
-
-
 
 /*****************************************new objects and insert object functions******************************************************/
 void insert_item(itemlst** items, item* new_item) {
@@ -65,6 +70,8 @@ void insert_warehouse(wlst** warehouses, warehouse* new_warehouse) {
     new_node->next = *warehouses;
     *warehouses = new_node;
 }
+
+/****************************************find Matchings and register item to Warehouse*************************************************/
 item* find_item(itemlst* items, int id) {
     while (items) {
         if (items->data->id == id) {
@@ -92,9 +99,10 @@ void assign_item_to_warehouse(item* item, warehouse* warehouse) {
     item->warehouses = new_node;
 }
 
+/********************************************uregisters objects*************************************************************************/
 void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     wlst** current = &(item->warehouses);
-    while (*current) {
+    while (*current) {              // iterate over the list of warehouses and remove the warehouse from the list
         if ((*current)->data == warehouse) {
             wlst* next = (*current)->next;
             free(*current);
@@ -105,6 +113,7 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     }
 }
 
+/***********************************************printout functions***********************************************************************/
 void print_items(itemlst* items) {
     while (items) {
         printf("Item name: %s, ID: %d\n", items->data->name, items->data->id);
@@ -112,6 +121,7 @@ void print_items(itemlst* items) {
     }
 }
 
+/***************************************************free**********************************************************************************/
 void free_items(itemlst* items) {
     while (items) {
         itemlst* next = items->next;
@@ -125,65 +135,48 @@ void free_items(itemlst* items) {
 void free_warehouses(wlst* warehouses) {
     while (warehouses) {
         wlst* next = warehouses->next;
-        free(warehouses->data->location);
+        free(warehouses->data->name);
         free(warehouses->data);
         free(warehouses);
         warehouses = next;
     }
 }
 
-int gen_100_10(itemlst** items, wlst** warehouses) {
-    srand(1948);
-
-    // Create 10 warehouses
-    for (int i = 0; i < 10; i++) {
-        char location[10];
-        sprintf(location, "warehouse%d", i);
-        warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
-        new_warehouse->location = (char*)malloc(strlen(location) + 1);
-        strcpy(new_warehouse->location, location);
-        new_warehouse->code = i;
-        new_warehouse->items = 0;
-        insert_warehouse(warehouses, new_warehouse);
-    }
-
-    // Create 100 items and assign them to warehouses
-    for (int i = 0; i < 100; i++) {
-        char name[10];
-        sprintf(name, "item%d", i);
-        item* new_item = (item*)malloc(sizeof(item));
-        new_item->name = (char*)malloc(strlen(name) + 1);
-        strcpy(new_item->name, name);
-        new_item->id = i;
-        new_item->warehouses = 0;
-        insert_item(items, new_item);
-
-        // Assign the item to a warehouse
-        warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
-        assign_item_to_warehouse(new_item, warehouse_to_assign);
-    }
-
-    return 0;
-}
-
-
-/****************************************find Matchings and register item to Warehouse*************************************************/
-
-
-
-/********************************************uregisters objects*************************************************************************/
-
-
-
-/***********************************************printout functions***********************************************************************/
-
-
-/***************************************************free**********************************************************************************/
-
-
 /*******************************************Generate And Assign Items And Warehouses******************************************************/
+// int gen_100_10(itemlst** items, wlst** warehouses) {
+//     srand(1948);
 
+//     // Create 10 warehouses
+//     for (int i = 0; i < 10; i++) {
+//         char location[10];
+//         sprintf(location, "warehouse%d", i);
+//         warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
+//         new_warehouse->name = (char*)malloc(strlen(location) + 1);
+//         strcpy(new_warehouse->name, location);
+//         new_warehouse->code = i;
+//         new_warehouse->items = 0;
+//         insert_warehouse(warehouses, new_warehouse);
+//     }
 
+//     // Create 100 items and assign them to warehouses
+//     for (int i = 0; i < 100; i++) {
+//         char name[10];
+//         sprintf(name, "item%d", i);
+//         item* new_item = (item*)malloc(sizeof(item));
+//         new_item->name = (char*)malloc(strlen(name) + 1);
+//         strcpy(new_item->name, name);
+//         new_item->id = i;
+//         new_item->warehouses = 0;
+//         insert_item(items, new_item);
+
+//         // Assign the item to a warehouse
+//         warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
+//         assign_item_to_warehouse(new_item, warehouse_to_assign);
+//     }
+
+//     return 0;
+// }
+/*******************************************Main Function**********************************************************************************/
 /*DO NOT TOUCH THIS FUNCTION */
 void getstring(char* buf, int length) {
     int len;
@@ -243,6 +236,16 @@ int main() {
 			printf("\n Add new item: name %s item id: %d",buf, id);
             
 			//your function
+            if (find_item(items, id)) {
+                #ifdef DEBUGON
+                printf("Item with ID %d already exists\n", id);
+                #endif
+                break;
+            }
+            item* new_item = (item*)malloc(sizeof(item));
+            new_item->name = (char*)malloc(strlen(buf) + 1);
+            new_item->id = id;
+            insert_item(&items, new_item);
 
             break;
 
@@ -258,6 +261,16 @@ int main() {
 			printf("\n Add new warehouse: name %s warehouse code: %d",buf, num);
             
 			//your function
+            if (find_warehouse(warehouses, num)) {
+                #ifdef DEBUGON
+                printf("Warehouse with code %d already exists\n", num);
+                #endif
+                break;
+            }
+            warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
+            new_warehouse->name = (char*)malloc(strlen(buf) + 1);
+            new_warehouse->code = num;
+            insert_warehouse(&warehouses, new_warehouse);
 
             break;
 
@@ -271,7 +284,15 @@ int main() {
             scanf("%d", &num);
 
             //your function
-
+            item* item_to_assign = find_item(items, id);
+            warehouse* warehouse_to_assign = find_warehouse(warehouses, num);
+            if (!item_to_assign || !warehouse_to_assign) {
+                #ifdef DEBUGON
+                printf("Item or warehouse not found\n");
+                #endif
+                break;
+            }
+            assign_item_to_warehouse(item_to_assign, warehouse_to_assign);
             break;
 
         case 'u':
