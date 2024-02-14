@@ -4,7 +4,7 @@
 
 /**************************************************************************************************/
 /***************************YOU MUST REMARK IT BEFORE SUBMISSION***********************************/
-#define DEBUGON
+//#define DEBUGON
 /***************************YOU MUST REMARK IT BEFORE SUBMISSION***********************************/
 /**************************************************************************************************/
 
@@ -236,7 +236,13 @@ void gen_100_10(itemlst** items, wlst** warehouses) {
     // Create 10 warehouses
     for (int i = 0; i < 10; i++) {
         char location[20];
-        sprintf(location, "warehouse%d", i);
+        sprintf(location, "Warehouse%d", i);
+        if (find_warehouse(*warehouses, i)) {
+            #ifdef DEBUGON
+            printf("Warehouse with code %d already exists\n", i);
+            #endif
+            continue;
+        }
         warehouse* new_warehouse = (warehouse*)malloc(sizeof(warehouse));
         new_warehouse->name = (char*)malloc(strlen(location) + 1);
         strcpy(new_warehouse->name, location);
@@ -261,11 +267,12 @@ void gen_100_10(itemlst** items, wlst** warehouses) {
         new_item->id = i;
         new_item->warehouses = 0;
         insert_item(items, new_item);
-
-        // Assign the item to a warehouse
-        warehouse* warehouse_to_assign = find_warehouse(*warehouses, i % 10);
-        assign_item_to_warehouse(new_item, warehouse_to_assign);
     }
+    // Assign the item to a warehouse
+    for (int i = 0; i < 100; i++) {
+        int randomCode = rand() % 10;
+        warehouse* warehouse_to_assign = find_warehouse(*warehouses, randomCode);
+        assign_item_to_warehouse(find_item(*items, i), warehouse_to_assign);}
 }
 /*******************************************Main Function**********************************************************************************/
 /*DO NOT TOUCH THIS FUNCTION */
@@ -435,6 +442,8 @@ int main() {
     } while (c != 'q');
 
     //your free functions
+    free_items(items);
+    free_warehouses(warehouses);
 	exit(0);
     
 }
