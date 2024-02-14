@@ -67,10 +67,17 @@ void insert_item(itemlst** items, item* new_item) {
         *items = new_node; // If the list is empty, make the new node the head of the list
     } else {
         itemlst* current = *items;
-        while (current->next != NULL) {
+        if (current->data->id > new_item->id) { // If the new node should be the head of the list
+            new_node->next = current;
+            *items = new_node;
+            return;
+        }
+        while (current->next != NULL && (current->next->data->id < new_item->id)) {
             current = current->next; // Traverse to the last node of the list
         }
-        current->next = new_node; // Set the next pointer of the last node to the new node
+        itemlst* temp = current->next; // Save the next pointer of the current node
+        current->next = new_node; 
+        new_node->next = temp;
     }
 }
 
@@ -83,10 +90,17 @@ void insert_warehouse(wlst** warehouses, warehouse* new_warehouse) {
         *warehouses = new_node; // If the list is empty, make the new node the head of the list
     } else {
         wlst* current = *warehouses;
-        while (current->next != NULL) {
+        if (current->data->code > new_warehouse->code) { // If the new node should be the head of the list
+            new_node->next = current;
+            *warehouses = new_node;
+            return;
+        }
+        while (current->next != NULL && (current->next->data->code < new_warehouse->code)) {
             current = current->next; // Traverse to the last node of the list
         }
-        current->next = new_node; // Set the next pointer of the last node to the new node
+        wlst* temp = current->next; // Save the next pointer of the current node
+        current->next = new_node;
+        new_node->next = temp;
     }
 }
 
@@ -158,10 +172,10 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
 void print_items(itemlst* items) {
     printf("item LIST:\n");
     while (items) {
-        printf("%d:%s\n", items->data->id, items->data->name);
+        printf("%d:%s", items->data->id, items->data->name);
         wlst* wares = items->data->warehouses;
         if (wares) {
-            printf("Item Warehouses: ");
+            printf("\nItem Warehouses: ");
             // printf("None");
         }
         while (wares) {
@@ -179,10 +193,10 @@ void print_items(itemlst* items) {
 void print_warehouse(wlst* warehouses) {
     printf("warehouse LIST:\n");
     while (warehouses) {
-        printf("Warehouse code %d, Warehouse name: %s\n", warehouses->data->code, warehouses->data->name);
+        printf("Warehouse code %d, Warehouse name: %s", warehouses->data->code, warehouses->data->name);
         itemlst* items = warehouses->data->items;
         if (items) {
-            printf("items: ");
+            printf("\nitems: ");
             // printf("None");
         }
         while (items) {
@@ -234,7 +248,13 @@ void gen_100_10(itemlst** items, wlst** warehouses) {
     // Create 100 items and assign them to warehouses
     for (int i = 0; i < 100; i++) {
         char name[10];
-        sprintf(name, "item%d", i);
+        sprintf(name, "Item%d", i);
+        if (find_item(*items, i)) {
+            #ifdef DEBUGON
+            printf("Item with ID %d already exists\n", i);
+            #endif
+            continue;
+        }
         item* new_item = (item*)malloc(sizeof(item));
         new_item->name = (char*)malloc(strlen(name) + 1);
         strcpy(new_item->name, name);
