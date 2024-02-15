@@ -158,7 +158,7 @@ void assign_item_to_warehouse(item* item, warehouse* warehouse) {
 /********************************************uregisters objects*************************************************************************/
 void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     wlst** current = &(item->warehouses);
-    while (*current) {              // iterate over the list of warehouses and remove the warehouse from the list
+    while (*current) {
         if ((*current)->data == warehouse) {
             wlst* next = (*current)->next;
             free(*current);
@@ -171,7 +171,7 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
 
 void unassign_warehouse_from_item(warehouse* warehouse, item* item) {
     itemlst** current = &(warehouse->items);
-    while (*current) {              // iterate over the list of items and remove the item from the list
+    while (*current) {
         if ((*current)->data == item) {
             itemlst* next = (*current)->next;
             free(*current);
