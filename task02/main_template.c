@@ -161,6 +161,8 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     while (*current) {              // iterate over the list of warehouses and remove the warehouse from the list
         if ((*current)->data == warehouse) {
             wlst* next = (*current)->next;
+            free((*current)->data->name);
+            free((*current)->data);
             free(*current);
             *current = next;
         } else {
@@ -174,6 +176,8 @@ void unassign_warehouse_from_item(warehouse* warehouse, item* item) {
     while (*current) {              // iterate over the list of items and remove the item from the list
         if ((*current)->data == item) {
             itemlst* next = (*current)->next;
+            free((*current)->data->name);
+            free((*current)->data);
             free(*current);
             *current = next;
         } else {
