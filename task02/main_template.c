@@ -161,8 +161,6 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     while (*current) {              // iterate over the list of warehouses and remove the warehouse from the list
         if ((*current)->data == warehouse) {
             wlst* next = (*current)->next;
-            free((*current)->data->name);
-            free((*current)->data);
             free(*current);
             *current = next;
         } else {
@@ -176,8 +174,6 @@ void unassign_warehouse_from_item(warehouse* warehouse, item* item) {
     while (*current) {              // iterate over the list of items and remove the item from the list
         if ((*current)->data == item) {
             itemlst* next = (*current)->next;
-            free((*current)->data->name);
-            free((*current)->data);
             free(*current);
             *current = next;
         } else {
@@ -446,9 +442,8 @@ int main() {
 
         case 'p':
             printf("Printing status.\n");
-
+ 
             print_items(items);
-            //your function
             print_warehouse(warehouses);
 
             break;
@@ -473,6 +468,7 @@ int main() {
     
     free_items(items);
     free_warehouses(warehouses);
+    
 	exit(0);
     
 }
