@@ -50,7 +50,6 @@ item* find_item(itemlst* items, int id);
 warehouse* find_warehouse(wlst* warehouses, int code);
 void assign_item_to_warehouse(item* item, warehouse* warehouse);
 void unassign_item_from_warehouse(item* item, warehouse* warehouse);
-void unassign_warehouse_from_item(warehouse* warehouse, item* item);
 void print_items(itemlst* items);
 void print_warehouse(wlst* warehouses);
 void free_items(itemlst* items);
@@ -169,19 +168,6 @@ void unassign_item_from_warehouse(item* item, warehouse* warehouse) {
     }
 }
 
-void unassign_warehouse_from_item(warehouse* warehouse, item* item) {
-    itemlst** current = &(warehouse->items);
-    while (*current) {              // iterate over the list of items and remove the item from the list
-        if ((*current)->data == item) {
-            itemlst* next = (*current)->next;
-            free(*current);
-            *current = next;
-        } else {
-            current = &((*current)->next);
-        }
-    }
-}
-
 /***********************************************printout functions***********************************************************************/
 void print_items(itemlst* items) {
     printf("item LIST:\n");
@@ -226,11 +212,6 @@ void print_warehouse(wlst* warehouses) {
 void free_items(itemlst* items) {
     while (items) {
         itemlst* next = items->next;
-        while(items->data->warehouses) {  // free the list of warehouses from item
-            wlst* next_warehouse = items->data->warehouses->next;
-            unassign_warehouse_from_item(items->data->warehouses->data, items->data);
-            items->data->warehouses = next_warehouse;
-        }
         free(items->data->name);
         free(items->data);
         free(items);
@@ -241,11 +222,6 @@ void free_items(itemlst* items) {
 void free_warehouses(wlst* warehouses) {
     while (warehouses) {
         wlst* next = warehouses->next;
-        while(warehouses->data->items) {  // free the list of items from warehouse
-            itemlst* next_item = warehouses->data->items->next;
-            unassign_item_from_warehouse(warehouses->data->items->data, warehouses->data);
-            warehouses->data->items = next_item;
-        }
         free(warehouses->data->name);
         free(warehouses->data);
         free(warehouses);
@@ -466,7 +442,6 @@ int main() {
     } while (c != 'q');
 
     //your free functions
-    
     free_items(items);
     free_warehouses(warehouses);
 	exit(0);
