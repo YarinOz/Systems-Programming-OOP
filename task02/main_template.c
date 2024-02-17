@@ -317,7 +317,7 @@ int main() {
     wlst* warehouses = 0;
     char  c;
     char  buf[100];
-    int   id, num;
+    int   id, num, test;
 	
 
 
@@ -343,7 +343,11 @@ int main() {
 			
 
             printf("item ID: ");
-            scanf("%d", &id);
+            test = scanf("%d", &id);
+            if (test == EOF || test == 0) {
+                print_error_message(1);
+                break;
+            }
 			
 			printf("\n Add new item: name %s item id: %d",buf, id);
             
@@ -369,8 +373,13 @@ int main() {
             getstring(buf, 100);
 
             printf("\n warehouse code: ");
-            scanf("%d", &num);
-			
+            test = scanf("%d", &num);
+			if (test == EOF || test == 0) {
+                printf("test: %d\n", test);
+                print_error_message(1);
+                break;
+            }
+
 			printf("\n Add new warehouse: name %s warehouse code: %d",buf, num);
             
 			//your function
@@ -449,6 +458,7 @@ int main() {
         case 'q':
             printf("Quitting...\n");
             break;
+
         }
 
         if (c != 'q')
