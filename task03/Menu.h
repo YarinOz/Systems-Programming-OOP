@@ -11,10 +11,11 @@
 class Menu
 {
    public:
+      Menu(){}
+      ~Menu(){}
       void mainMenu();
       void stackMenu();
       void queueMenu();
-      void exit();
 
 };
 #endif

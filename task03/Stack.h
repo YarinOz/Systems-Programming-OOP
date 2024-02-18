@@ -15,10 +15,7 @@ class Stack
 
    public:
       Stack();
-      ~Stack()
-      {
-         cout << "Stack destructor" << endl;
-      }
+      ~Stack(){}
       void push(int data);
       int pop();
       bool isEmpty() const
@@ -33,6 +30,7 @@ class Stack
          }
          return top->get();
       }
+      void print() const;
    // Operators (needed to be filled)
 };
 #endif

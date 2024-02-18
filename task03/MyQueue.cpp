@@ -1,9 +1,5 @@
 #include "MyQueue.h"
 
-myQueue::myQueue(int maxQ): maxQ(maxQ)
-{
-    vector<int> data;
-}
 
 bool myQueue::enQueue(int val)
 {
@@ -43,4 +39,19 @@ int myQueue::peek()
         return -1;
     }
     return data.front();
+}
+
+void myQueue::print() const
+{   
+    if (data.empty())
+    {
+        cout << "The queue is empty" << endl;
+        return;
+    }
+    cout << data[0] << " ";
+    for (int i = 1; i < data.size(); i++)
+    {
+        cout << "<- " << data[i] << " ";
+    }
+    cout << endl;
 }

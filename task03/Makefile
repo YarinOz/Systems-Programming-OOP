@@ -1,9 +1,9 @@
 
 all: StackNode.cpp
-	g++ -std=c++11 -o StackNode.out StackNode.cpp
+	g++ -std=c++11 -o task3.out assignment1.cpp Menu.cpp StackNode.cpp Stack.cpp MyQueue.cpp
 
 run: all
-	./StackNode.out
+	./task3.out
 
 clean:
 	rm -f *.out

@@ -10,17 +10,13 @@ class myQueue
       int maxQ;
 
    public:
-      myQueue(int maxQ = 100) //??
-      {
-      }
-      ~myQueue()
-      {
-         cout << "MyQueue destructor" << endl;
-      }
+      myQueue(int maxQ = 100): maxQ(maxQ){}
+      ~myQueue(){}
       bool enQueue(int val);
       bool deQueue();
       bool isEmpty();
       int peek();
+      void print() const;
 
 };
 

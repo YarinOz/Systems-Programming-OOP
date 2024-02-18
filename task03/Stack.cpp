@@ -16,14 +16,32 @@ int Stack::pop() // check if needed to be void
 {
    if (isEmpty())
    {  // Stack is empty
-      cout << "Stack is empty" << endl;
+      cout << "Stack empty" << endl;
       return -1;
    }  // Set top to the next node and delete the current top
    int data = top->get();
+   cout << "Removing " << data << endl;
    StackNode *temp = top;
    top = top->getNext();
    delete temp;
    return data;
+}
+void Stack::print() const
+{
+   if (isEmpty())
+   {
+      cout << "The stack is empty" << endl;
+      return;
+   }
+   StackNode *temp = top;
+   int i = 1;
+   while (temp != nullptr)
+   {
+      cout << i << ". " << temp->get() << endl;
+      temp = temp->getNext();
+      i++;
+   }
+   cout << endl;
 }
 
 

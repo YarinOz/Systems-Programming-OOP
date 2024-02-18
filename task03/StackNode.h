@@ -16,10 +16,7 @@ class StackNode
 
    public:
       StackNode(int data = 0, StackNode *next = nullptr);
-      ~StackNode()
-      {
-         cout << "StackNode destructor" << endl;
-      }
+      ~StackNode(){}
       int get() const   // Return the data (cant be changed)
       {
          return data;
