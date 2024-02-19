@@ -32,5 +32,11 @@ class Stack
       }
       void print() const;
    // Operators (needed to be filled)
+      Stack& operator+(const Stack& other);
+      Stack& operator+(const int num);
+      Stack& operator+=(const Stack& other);
+      Stack& operator==(const Stack& other);
+      Stack& operator<<(const Stack& other);
+
 };
 #endif

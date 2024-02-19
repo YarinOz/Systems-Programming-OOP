@@ -44,7 +44,54 @@ void Stack::print() const
    cout << endl;
 }
 
+// Operators
 
+Stack& Stack::operator+(const Stack& other)
+{
+   StackNode *temp = other.top;
+   while (temp != nullptr)
+   {
+      push(temp->get());
+      temp = temp->getNext();
+   }
+   return *this;
+}
 
-// int main()
-// {
+Stack& Stack::operator+(const int num)
+{
+   push(num);
+   return *this;
+}
+
+Stack& Stack::operator+=(const Stack& other)
+{
+   StackNode *temp = other.top;
+   while (temp != nullptr)
+   {
+      push(temp->get());
+      temp = temp->getNext();
+   }
+   return *this;
+}
+
+Stack& Stack::operator==(const Stack& other)
+{
+   StackNode *temp = other.top;
+   while (temp != nullptr)
+   {
+      push(temp->get());
+      temp = temp->getNext();
+   }
+   return *this;
+}
+
+Stack& Stack::operator<<(const Stack& other)
+{
+   StackNode *temp = other.top;
+   while (temp != nullptr)
+   {
+      push(temp->get());
+      temp = temp->getNext();
+   }
+   return *this;
+}

@@ -16,3 +16,4 @@
 - Check for efficiency and reuse code.
 - Check for private, public in classes.
 - Make sure a const and define are used.
+- edit operator in stack.cpp
