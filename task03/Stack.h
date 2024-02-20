@@ -30,13 +30,16 @@ class Stack
          }
          return top->get();
       }
-      void print() const;
-   // Operators (needed to be filled)
-      Stack& operator+(const Stack& other);
-      Stack& operator+(const int num);
-      Stack& operator+=(const Stack& other);
-      Stack& operator==(const Stack& other);
-      Stack& operator<<(const Stack& other);
+      void print(ostream& os) const;
+      int size() const;
+      
+      // Operators 
+      Stack operator+(const Stack& other);
+      Stack operator+(const int num);
+      friend Stack operator+(const int num, const Stack& other);
+      Stack& operator+=(const int num);
+      bool operator==(const Stack& other);
+      friend ostream& operator<<(ostream& os, const Stack& other);
 
 };
 #endif

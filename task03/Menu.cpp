@@ -71,7 +71,7 @@ void Menu::stackMenu()
             }
             break;
         case 4:
-            stack->print();
+            cout << (*stack);
             break;
         case 5:
             delete stack; // delete stack; // Dynamic allocation

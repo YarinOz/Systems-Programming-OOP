@@ -26,72 +26,99 @@ int Stack::pop() // check if needed to be void
    delete temp;
    return data;
 }
-void Stack::print() const
+ 
+void Stack::print(ostream& os) const
 {
    if (isEmpty())
    {
-      cout << "The stack is empty" << endl;
+      os << "The stack is empty" << endl;
       return;
    }
    StackNode *temp = top;
    int i = 1;
    while (temp != nullptr)
    {
-      cout << i << ". " << temp->get() << endl;
+      os << i << ". " << temp->get() << endl;
       temp = temp->getNext();
       i++;
    }
-   cout << endl;
+   os << endl;
+}
+
+int Stack::size() const
+{
+   int count = 0;
+   StackNode *temp = top;
+   while (temp != nullptr)
+   {
+      count++;
+      temp = temp->getNext();
+   }
+   return count;
 }
 
 // Operators
 
-Stack& Stack::operator+(const Stack& other)
+Stack Stack::operator+(const Stack& other)   // stack + stack
 {
-   StackNode *temp = other.top;
-   while (temp != nullptr)
+   // pushing stack1 to stack2 in reverse order to get {s1,s2}
+   Stack temp = other;    // copy of stack 2
+   Stack pushed = *this;  // copy of stack 1
+   // creating a reverse of stack 1
+   Stack reverse;
+   while (!pushed.isEmpty())
    {
-      push(temp->get());
-      temp = temp->getNext();
+      reverse.push(pushed.pop());
    }
-   return *this;
+   // pushing the reverse of stack 1 to stack 2
+   while (!reverse.isEmpty())
+   {
+      temp.push(reverse.pop());
+   }
+   
+   return temp;
 }
 
-Stack& Stack::operator+(const int num)
+Stack Stack::operator+(const int num)  // stack + num
+{
+   Stack temp = *this;
+   temp.push(num);
+   return temp;
+}
+
+Stack operator+(const int num, const Stack& other) // friend function [num + stack]
+{
+   Stack temp = other;
+   temp.push(num);
+   return temp;
+}
+
+Stack& Stack::operator+=(const int num)   // stack += num
 {
    push(num);
    return *this;
 }
 
-Stack& Stack::operator+=(const Stack& other)
+bool Stack::operator==(const Stack& other)
 {
-   StackNode *temp = other.top;
-   while (temp != nullptr)
+   Stack s1 = *this;
+   Stack s2 = other;
+   if (s1.size() != s2.size()) //checks if of same length
    {
-      push(temp->get());
-      temp = temp->getNext();
+      return false;
    }
-   return *this;
+   while (s2.top != nullptr) // checks if elements are equal and in the same order
+   {
+      if (s1.pop() != s2.pop())
+      {
+         return false;
+      }
+   }
+   return true;
 }
 
-Stack& Stack::operator==(const Stack& other)
+ostream& operator<<(ostream& os, const Stack& other)
 {
-   StackNode *temp = other.top;
-   while (temp != nullptr)
-   {
-      push(temp->get());
-      temp = temp->getNext();
-   }
-   return *this;
-}
-
-Stack& Stack::operator<<(const Stack& other)
-{
-   StackNode *temp = other.top;
-   while (temp != nullptr)
-   {
-      push(temp->get());
-      temp = temp->getNext();
-   }
-   return *this;
+   other.print(os);
+   return os;
 }
