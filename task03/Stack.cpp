@@ -20,7 +20,6 @@ int Stack::pop() // check if needed to be void
       return -1;
    }  // Set top to the next node and delete the current top
    int data = top->get();
-   cout << "Removing " << data << endl;
    StackNode *temp = top;
    top = top->getNext();
    delete temp;
@@ -42,7 +41,6 @@ void Stack::print(ostream& os) const
       temp = temp->getNext();
       i++;
    }
-   os << endl;
 }
 
 int Stack::size() const
@@ -57,12 +55,31 @@ int Stack::size() const
    return count;
 }
 
+Stack::Stack(const Stack& other)  // Copy constructor
+{
+    // Creates deep copy of the other stack
+    top = nullptr;
+    StackNode* current = other.top;
+    Stack temp;
+   // we get and push twice to avoid reverse order
+   while (current != nullptr) {
+        temp.push(current->get());
+        current = current->getNext();
+   }
+   // temp is in reverse order, so we push it to this stack
+   current = temp.top;
+   while (current != nullptr) {
+         this->push(current->get());
+         current = current->getNext();
+   }
+}
+
 // Operators
 
-Stack Stack::operator+(const Stack& other)   // stack + stack
+Stack Stack::operator+(const Stack& other) const  // stack + stack
 {
    // pushing stack1 to stack2 in reverse order to get {s1,s2}
-   Stack temp = other;    // copy of stack 2
+   Stack temp(other);    // deep copy of stack 2
    Stack pushed = *this;  // copy of stack 1
    // creating a reverse of stack 1
    Stack reverse;
@@ -78,18 +95,59 @@ Stack Stack::operator+(const Stack& other)   // stack + stack
    
    return temp;
 }
+// this commented block is a different implementation of switched order of stack1 and stack2/num
+// Stack Stack::operator+(const int num) const // stack + num
+// {
+//    // pushing stack1 to num in reverse order to get {s1,num}
+//    Stack temp;    // copy of num in stack
+//    temp.push(num);
+//    Stack pushed = *this;  // copy of stack 1
+//    // creating a reverse of stack 1
+//    Stack reverse;
+//    while (!pushed.isEmpty())
+//    {
+//       reverse.push(pushed.pop());
+//    }
+//    // pushing the reverse of stack 1 to num
+//    while (!reverse.isEmpty())
+//    {
+//       temp.push(reverse.pop());
+//    }
+//    return temp;
+// }
 
-Stack Stack::operator+(const int num)  // stack + num
+// Stack operator+(const int num, const Stack& other) // friend function [num + stack]
+// {
+//    Stack temp = other;
+//    temp.push(num);
+//    return temp;
+// }
+
+Stack Stack::operator+(const int num) const // stack + num
 {
    Stack temp = *this;
    temp.push(num);
    return temp;
+
 }
 
 Stack operator+(const int num, const Stack& other) // friend function [num + stack]
 {
-   Stack temp = other;
+   // pushing stack1 to num in reverse order to get {s1,num}
+   Stack temp;    // copy of num in stack
    temp.push(num);
+   Stack pushed(other);  // deep copy (cp ctor) of stack 1
+   // creating a reverse of stack 1
+   Stack reverse;
+   while (!pushed.isEmpty())
+   {
+      reverse.push(pushed.pop());
+   }
+   // pushing the reverse of stack 1 to num
+   while (!reverse.isEmpty())
+   {
+      temp.push(reverse.pop());
+   }
    return temp;
 }
 
@@ -99,10 +157,10 @@ Stack& Stack::operator+=(const int num)   // stack += num
    return *this;
 }
 
-bool Stack::operator==(const Stack& other)
+bool Stack::operator==(const Stack& other) const
 {
    Stack s1 = *this;
-   Stack s2 = other;
+   Stack s2(other); // deep copy (cp ctor) of stack 2
    if (s1.size() != s2.size()) //checks if of same length
    {
       return false;

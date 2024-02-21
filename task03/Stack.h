@@ -14,10 +14,14 @@ class Stack
       StackNode *top;
 
    public:
-      Stack();
-      ~Stack(){}
+      Stack();                   // Constructor
+      Stack(const Stack& other); // Copy constructor
+      ~Stack(){}                 // Destructor
+      
+      // Methods
       void push(int data);
       int pop();
+
       bool isEmpty() const
       {
          return top == nullptr;
@@ -34,11 +38,11 @@ class Stack
       int size() const;
       
       // Operators 
-      Stack operator+(const Stack& other);
-      Stack operator+(const int num);
+      Stack operator+(const Stack& other) const;
+      Stack operator+(const int num) const;
       friend Stack operator+(const int num, const Stack& other);
       Stack& operator+=(const int num);
-      bool operator==(const Stack& other);
+      bool operator==(const Stack& other) const;
       friend ostream& operator<<(ostream& os, const Stack& other);
 
 };

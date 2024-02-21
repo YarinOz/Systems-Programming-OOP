@@ -58,7 +58,7 @@ void Menu::stackMenu()
             break;
         }
         case 2:
-            stack->pop();
+            cout << "Removing " << stack->pop() << endl;
             break;
         case 3:
             if (stack->isEmpty())
