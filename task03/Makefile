@@ -1,9 +1,26 @@
+CXX = g++	# the compiler
+CXXFLAGS = -std=c++11	# the compiler flags
 
-all: StackNode.cpp
-	g++ -std=c++11 -o task3.out assignment1.cpp Menu.cpp StackNode.cpp Stack.cpp MyQueue.cpp
+SRC_EXE = assignment1.cpp 
+SRC_OBJ = Menu.cpp StackNode.cpp Stack.cpp MyQueue.cpp # the OBJ files
+OBJ := $(patsubst %.cpp,%.o,$(SRC_OBJ))    # obj
+EXEC = task3.out	# executable
 
-run: all
-	./task3.out
+all: $(EXEC) clean_obj 
+
+%.o: %.cpp	# compile to obj
+	$(CXX) $(CXXFLAGS) -c $< -o $@ 	
+
+$(EXEC): $(OBJ)	# link to executable
+	$(CXX) $(CXXFLAGS) $(SRC_EXE) $^ -o $@
+
+clean_obj:
+	rm -f $(OBJ)
+
+run: 
+	./$(EXEC)
 
 clean:
-	rm -f *.out
+	rm -f $(EXEC)
+
+.PHONY: clean
