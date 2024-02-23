@@ -7,7 +7,17 @@
 #include "Stack.h" 
 
 Stack::Stack(): top(nullptr) {}
-void Stack::push(int data)
+
+Stack::~Stack()
+{
+   while (top != nullptr)
+   {
+      StackNode *temp = top;
+      top = top->getNext();
+      delete temp;
+   }
+}
+void Stack::push(const int data)
 {
    StackNode *node = new StackNode(data, top);
    top = node;

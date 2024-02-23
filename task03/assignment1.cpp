@@ -23,40 +23,41 @@ using namespace std;
 // 	cout << s1 + s2;
 // 	cout << s2 + s1;	
 // 	Stack s3(s2);
+// 	cout << "s1s2s3\n";
+// 	cout << s1 + s2 + s3;
 // 	cout << s3;
 // 	cout << "\n\n s1==s2 \n" << (s1 == s2 ? "true" : "false") << endl;
 // 	cout << "\n\n s2==s3 \n" << (s2 == s3 ? "true" : "false") << endl;
 
-
 // return 0;
 // }
 
-int main() {
-	myQueue q1;
-	myQueue q2;
-	q1.enQueue(5);
-	q1.enQueue(3);
-	q1.enQueue(10);
-	q2.enQueue(3);
-	q2.enQueue(4);
-	q2.enQueue(9);
-	q1.print();
-	q2.print();
-	q1.deQueue();
-	q2.deQueue();
-	q1.print();
-	q2.print();
-	myQueue q3(q2);
-	q3.print();
-	cout << q1.peek() << endl;
-	cout << q2.peek() << endl;
-	cout << "\n\n q1 is empty \n" << (q1.isEmpty() ? "true" : "false") << endl;
-	return 0;
-}
-
 // int main() {
-// 	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
-// 	Menu a;
-// 	a.mainMenu();
+// 	myQueue q1;
+// 	myQueue q2;
+// 	q1.enQueue(5);
+// 	q1.enQueue(3);
+// 	q1.enQueue(10);
+// 	q2.enQueue(3);
+// 	q2.enQueue(4);
+// 	q2.enQueue(9);
+// 	q1.print();
+// 	q2.print();
+// 	q1.deQueue();
+// 	q2.deQueue();
+// 	q1.print();
+// 	q2.print();
+// 	myQueue q3(q2);
+// 	q3.print();
+// 	cout << q1.peek() << endl;
+// 	cout << q2.peek() << endl;
+// 	cout << "\n\n q1 is empty \n" << (q1.isEmpty() ? "true" : "false") << endl;
 // 	return 0;
 // }
+
+int main() {
+	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
+	Menu a;
+	a.mainMenu();
+	return 0;
+}

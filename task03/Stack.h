@@ -16,10 +16,10 @@ class Stack
    public:
       Stack();                   // Constructor
       Stack(const Stack& other); // Copy constructor
-      ~Stack(){}                 // Destructor
+      ~Stack();                 // Destructor
       
       // Methods
-      void push(int data);
+      void push(const int data);
       int pop();
 
       bool isEmpty() const

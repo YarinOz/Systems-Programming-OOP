@@ -8,10 +8,3 @@
 
 StackNode::StackNode(int data, StackNode *next): data(data), next(next) {}
 
-// int main()
-// {
-//    StackNode *node = new StackNode(5);
-//    cout << node->get() << endl;
-//    delete node;
-//    return 0;
-// }
