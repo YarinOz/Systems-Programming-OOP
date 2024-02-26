@@ -106,47 +106,12 @@ Stack Stack::operator+(const Stack& other) const  // stack + stack
    return temp;
 }
 // this commented block is a different implementation of switched order of stack1 and stack2/num
-// Stack Stack::operator+(const int num) const // stack + num
-// {
-//    // pushing stack1 to num in reverse order to get {s1,num}
-//    Stack temp;    // copy of num in stack
-//    temp.push(num);
-//    Stack pushed = *this;  // copy of stack 1
-//    // creating a reverse of stack 1
-//    Stack reverse;
-//    while (!pushed.isEmpty())
-//    {
-//       reverse.push(pushed.pop());
-//    }
-//    // pushing the reverse of stack 1 to num
-//    while (!reverse.isEmpty())
-//    {
-//       temp.push(reverse.pop());
-//    }
-//    return temp;
-// }
-
-// Stack operator+(const int num, const Stack& other) // friend function [num + stack]
-// {
-//    Stack temp = other;
-//    temp.push(num);
-//    return temp;
-// }
-
 Stack Stack::operator+(const int num) const // stack + num
-{
-   Stack temp = *this;
-   temp.push(num);
-   return temp;
-
-}
-
-Stack operator+(const int num, const Stack& other) // friend function [num + stack]
 {
    // pushing stack1 to num in reverse order to get {s1,num}
    Stack temp;    // copy of num in stack
    temp.push(num);
-   Stack pushed(other);  // deep copy (cp ctor) of stack 1
+   Stack pushed = *this;  // copy of stack 1
    // creating a reverse of stack 1
    Stack reverse;
    while (!pushed.isEmpty())
@@ -158,6 +123,13 @@ Stack operator+(const int num, const Stack& other) // friend function [num + sta
    {
       temp.push(reverse.pop());
    }
+   return temp;
+}
+
+Stack operator+(const int num, const Stack& other) // friend function [num + stack]
+{
+   Stack temp = other;
+   temp.push(num);
    return temp;
 }
 
