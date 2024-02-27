@@ -8,9 +8,25 @@
 
 using namespace std;
 
+// int main() {
+// 	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
+// 	Menu a;
+// 	a.mainMenu();
+// 	return 0;
+// }
+
 int main() {
-	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
-	Menu a;
-	a.mainMenu();
+	Array<int> arr;
+	arr.add(1);
+	arr.add(2);
+	arr.add(3);
+	arr.add(2);
+	arr.add(1);
+	cout << "Size: " << arr.getSize() << endl;	
+	cout << arr << endl;
+	cout << arr[2] << endl;
+	arr.remove(2);
+	cout << arr[2] << endl;
+	
 	return 0;
 }
