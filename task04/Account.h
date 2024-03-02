@@ -4,6 +4,8 @@
 */ 
 #include <string>
 #include "Array.h"
+#include "CheckingAccount.h"
+#include "SavingsAccount.h"
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 

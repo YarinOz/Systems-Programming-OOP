@@ -12,12 +12,12 @@ using namespace std;
 #define SLEEPDUR 2 
 #define RATE 0.05 
 
-// int main() {
-// 	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
-// 	Menu a;
-// 	a.mainMenu();
-// 	return 0;
-// }
+int main() {
+	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
+	Menu a;
+	a.mainMenu();
+	return 0;
+}
 
 // int main() {
 // 	Array<int> arr;
@@ -56,13 +56,13 @@ using namespace std;
 // 	return 0;
 // }
 
-int main()
-{
-	CheckingAccount checkings("CA1010", "John Doe", 100, RATE); 
-	SavingsAccount savings("SA2020", "Yossi Yossi", 100, RATE); 
-	std::this_thread::sleep_for(std::chrono::seconds(SLEEPDUR)); 
-	savings.deposit(100); 
-	std::cout << '\n' << savings.getBalance() << std::endl; 
-	std::cout << '\n' << checkings.getBalance() << std::endl;
-	return 0;
-}
+// int main()
+// {
+// 	CheckingAccount checkings("CA1010", "John Doe", 100, RATE); 
+// 	SavingsAccount savings("SA2020", "Yossi Yossi", 100, RATE); 
+// 	std::this_thread::sleep_for(std::chrono::seconds(SLEEPDUR)); 
+// 	savings.deposit(100); 
+// 	std::cout << '\n' << savings.getBalance() << std::endl; 
+// 	std::cout << '\n' << checkings.getBalance() << std::endl;
+// 	return 0;
+// }

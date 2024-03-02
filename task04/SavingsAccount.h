@@ -2,12 +2,12 @@
    Author: Yarin Oziel, ID: 319149878
    Author: Itamar Meir, ID: 208536888
 */ 
+#ifndef SAVINGS_ACCOUNT_H
+#define SAVINGS_ACCOUNT_H
 #include "Account.h"
 #include <chrono>
 #include <cstring>
 #include <thread>
-#ifndef SAVINGS_ACCOUNT_H
-#define SAVINGS_ACCOUNT_H
 
 class SavingsAccount : public Account
 {

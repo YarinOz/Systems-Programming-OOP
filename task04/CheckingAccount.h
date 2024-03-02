@@ -2,9 +2,9 @@
    Author: Yarin Oziel, ID: 319149878
    Author: Itamar Meir, ID: 208536888
 */
-#include "Account.h" 
 #ifndef CHECKING_ACCOUNT_H
 #define CHECKING_ACCOUNT_H
+#include "Account.h" 
 
 class CheckingAccount : public Account
 {

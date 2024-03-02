@@ -2,10 +2,10 @@
    Author: Yarin Oziel, ID: 319149878
    Author: Itamar Meir, ID: 208536888
 */ 
-#include <iostream>
-using namespace std;
 #ifndef ARRAY_H
 #define ARRAY_H
+#include <iostream>
+using namespace std;
 
 template <class T>
 class Array;
