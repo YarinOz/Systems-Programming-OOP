@@ -18,8 +18,8 @@ class Array
 {
    private:
       int size;
-      T* arr;
-
+      T* arr;  
+      
    public:
       Array():size(0), arr(nullptr){}
       ~Array(){}
@@ -30,12 +30,12 @@ class Array
 
       // operator overloading
       friend ostream& operator<< <> (ostream& os, const Array<T>& other);
-      T& operator[](const int index) const;
+      const T& operator[](const int index) const;
 };
 
 
 template <class T>
-T& Array<T>::operator[](const int index) const {
+const T& Array<T>::operator[](const int index) const {
     return arr[index];
 }
 
