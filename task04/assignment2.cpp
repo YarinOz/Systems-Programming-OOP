@@ -4,6 +4,7 @@
 */ 
 
 #include "Menu.h"
+// #include "Account.h"
 #include <iostream>
 using namespace std;
 #include "SavingsAccount.h" 
@@ -11,6 +12,7 @@ using namespace std;
 #include <thread>
 #define SLEEPDUR 2 
 #define RATE 0.05 
+#define OVERDRAFT 1000
 
 int main() {
 	//simply creating a menu instance, then calling mainMenu(). the rest is inside mainMenu().
@@ -58,7 +60,7 @@ int main() {
 
 // int main()
 // {
-// 	CheckingAccount checkings("CA1010", "John Doe", 100, RATE); 
+// 	CheckingAccount checkings("CA1010", "John Doe", 100, OVERDRAFT); 
 // 	SavingsAccount savings("SA2020", "Yossi Yossi", 100, RATE); 
 // 	std::this_thread::sleep_for(std::chrono::seconds(SLEEPDUR)); 
 // 	savings.deposit(100); 

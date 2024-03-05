@@ -10,6 +10,8 @@ Account::Account(const std::string& number, const std::string& holder, double in
 
 ostream& operator<<(ostream& os, const Account& other)
 {
-    os << "Account number: " << other.accountNumber << ", Account holder: " << other.accountHolderName << ", Balance: " << other.Balance;
+    os << "Account Number: " << other.accountNumber << endl;
+    os << "Account Holder: " << other.accountHolderName << endl;
+    os << "New Balance: " << "$" << other.Balance;
     return os;
 }

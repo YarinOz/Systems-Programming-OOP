@@ -23,16 +23,36 @@ void Menu::addAccount(Account* account)
     size++;
 }
 
-CheckingAccount& Menu::createCheckingAccount(const std::string& number, const std::string& holder, double initialBalance, double overdraft)
+void Menu::AccountDeposit(int i, double amount)
 {
-    CheckingAccount* account = new CheckingAccount(number, holder, initialBalance, overdraft);
-    return *account;
+    if (i < 0 || i >= size)
+    {
+        cout << "Error: Index out of range." << endl;
+        return;
+    }
+    bankAccounts[i]->deposit(amount);
 }
 
-SavingsAccount& Menu::createSavingsAccount(const std::string& number, const std::string& holder, double initialBalance, double intrestRate)
+void Menu::removeAccount(int i)
 {
-    SavingsAccount* account = new SavingsAccount(number, holder, initialBalance, intrestRate);
-    return *account;
+    if (i < 0 || i >= size)
+    {
+        cout << "Error: Index out of range." << endl;
+        return;
+    }
+    delete bankAccounts[i];
+    bankAccounts.remove(i);
+    size--;
+}
+
+void Menu::AccountWithdraw(int i, double amount)
+{
+    if (i < 0 || i >= size)
+    {
+        cout << "Error: Index out of range." << endl;
+        return;
+    }
+    bankAccounts[i]->withdraw(amount);
 }
 
 void Menu::mainMenu()
@@ -44,6 +64,8 @@ void Menu::mainMenu()
     char accountType;
     double overdraftLimit;
     double iterestRate;
+    int index;
+    double amount;
     do
     {
         printMenu();
@@ -65,15 +87,15 @@ void Menu::mainMenu()
             {
                 cout << "Enter interest rate: ";
                 cin >> iterestRate;
-                SavingsAccount* account = &createSavingsAccount(accountNumber, accountHolderName, initialBalance, iterestRate);
-                addAccount(account);
+                Account* account = new SavingsAccount(accountNumber, accountHolderName, initialBalance, iterestRate);
+                addAccount(account); // add the account to the array
             }
             else if (accountType == 'C' || accountType == 'c')
             {
                 cout << "Enter overdraft limit: ";
                 cin >> overdraftLimit;
-                CheckingAccount* account = &createCheckingAccount(accountNumber, accountHolderName, initialBalance, overdraftLimit);
-                addAccount(account);
+                Account* account = new CheckingAccount(accountNumber, accountHolderName, initialBalance, overdraftLimit);
+                addAccount(account); // add the account to the array
             }
             else
             {
@@ -82,16 +104,32 @@ void Menu::mainMenu()
             cout << "Account added successfully." << endl;
             break;
         case 2:
-            // printAccounts();
+            cout << "Enter account index: ";
+            cin >> index;
+            cout << "Enter deposit amount: ";
+            cin >> amount;
+            AccountDeposit(index, amount);
             break;
         case 3:
-            // run();
+            cout << "Enter account index: ";
+            cin >> index;
+            cout << "Enter withdrawal amount: ";
+            cin >> amount;
+            AccountWithdraw(index, amount);
+            cout << "Withdrawn " << "$" << amount << endl;
             break;
         case 4:
-            cout << "Goodbye!" << endl;
+            cout << "Enter account index to delete: ";
+            cin >> index;
+            removeAccount(index);
+            cout << "Account deleted successfully." << endl;
             break;
         case 5:
-            cout << "Goodbye!" << endl;
+            for (int i = 0; i < size; i++)
+            {
+                cout << "Account " << i << ": " << endl;
+                cout << (*bankAccounts[i]) << endl;
+            }
             break;
         case 6:
             for (int i = 0; i < size; i++)

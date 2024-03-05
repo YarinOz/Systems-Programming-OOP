@@ -12,12 +12,14 @@ class CheckingAccount : public Account
       double overdraftLimit;
    
    public:
-      CheckingAccount(const std::string& number, const std::string& holder, double initialBalance, double overdraft);
+      CheckingAccount(const std::string& number, const std::string& holder, const double initialBalance, const double overdraft);
       ~CheckingAccount(){};
-      void deposit(double amount) override;
-      void withdraw(double amount) override;
-      void print(std::ostream& os) const;
-      friend std::ostream& operator<<(std::ostream& os, const CheckingAccount& other);
+      
+      void deposit(const double amount) override;
+      void withdraw(const double amount) override;
+
+      // void print(std::ostream& os) const;
+      // friend std::ostream& operator<<(std::ostream& os, const CheckingAccount& other);
 };
 
 

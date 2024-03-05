@@ -6,7 +6,6 @@
 #define SAVINGS_ACCOUNT_H
 #include "Account.h"
 #include <chrono>
-#include <cstring>
 #include <thread>
 
 class SavingsAccount : public Account
@@ -16,12 +15,14 @@ class SavingsAccount : public Account
       std::chrono::steady_clock::time_point lastTransactionTime;
    
    public:
-      SavingsAccount(const std::string& number, const std::string& holder, double initialBalance, double annualRate);
+      SavingsAccount(const std::string& number, const std::string& holder, const double initialBalance, const double annualRate);
       ~SavingsAccount(){};
-      void deposit(double amount) override;
-      void withdraw(double amount) override;
-      void print(std::ostream& os) const;
-      friend std::ostream& operator<<(std::ostream& os, const SavingsAccount& other);
+
+      void deposit(const double amount) override;
+      void withdraw(const double amount) override;
+
+      // void print(std::ostream& os) const;
+      // friend std::ostream& operator<<(std::ostream& os, const SavingsAccount& other);
 
 };
 

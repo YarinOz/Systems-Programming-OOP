@@ -5,7 +5,8 @@
 #ifndef MENU_H
 #define MENU_H
 #include "Array.h"
-#include "Account.h"
+#include "SavingsAccount.h"
+#include "CheckingAccount.h"
 
 class Menu
 {
@@ -20,11 +21,9 @@ class Menu
       void mainMenu();
       void printMenu() const;
       void addAccount(Account* account);
-      SavingsAccount& createSavingsAccount(const std::string& number, const std::string& holder, double initialBalance, double intrestRate);
-      CheckingAccount& createCheckingAccount(const std::string& number, const std::string& holder, double initialBalance, double overdraft);
-
-      // void printAccounts() const;
-      // void run();
+      void removeAccount(int i);
+      void AccountDeposit(int i, double amount);
+      void AccountWithdraw(int i, double amount);
 };
 
 #endif // MENU_H

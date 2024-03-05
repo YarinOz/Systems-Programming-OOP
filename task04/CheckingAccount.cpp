@@ -5,19 +5,20 @@
 
 #include "CheckingAccount.h"
 
-CheckingAccount::CheckingAccount(const std::string& number, const std::string& holder, double initialBalance, double overdraft)
+CheckingAccount::CheckingAccount(const std::string& number, const std::string& holder, const double initialBalance, const double overdraft)
     : Account(number, holder, initialBalance), overdraftLimit(overdraft){}
 
-void CheckingAccount::deposit(double amount)
+void CheckingAccount::deposit(const double amount)
 {
-    Account::deposit(amount);
+    this->Balance += amount;
+    cout << (*this) << endl;
 }
 
-void CheckingAccount::withdraw(double amount)
+void CheckingAccount::withdraw(const double amount)
 {
-    if (getBalance() - amount < -overdraftLimit)
+    if (this->Balance - amount < -overdraftLimit)
     {
         throw std::invalid_argument("Overdraft limit exceeded");
     }
-    Account::withdraw(amount);
+    this->Balance -= amount;
 }
