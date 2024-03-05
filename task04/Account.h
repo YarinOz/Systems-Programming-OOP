@@ -24,8 +24,8 @@ public:
    double getBalance() const { return Balance; }
 
    // pure virtual functions
-   virtual void deposit(double amount) { Balance += amount; }
-   virtual void withdraw(double amount) { Balance -= amount; }
+   virtual void deposit(double amount)=0;
+   virtual void withdraw(double amount)=0;
 
    // operator overloading
    friend ostream& operator<<(ostream& os, const Account& other);
