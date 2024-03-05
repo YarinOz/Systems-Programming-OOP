@@ -11,14 +11,12 @@
 
 # Notes to self:
 
-- left to do: menu ; deposit, withdraw, print, delete account.
 - Add allot of comments.
 - Check worst cases.
 - Check for efficiency and reuse code.
-- Check for mem leaks.
+- Check for mem leaks.(valgrind)
 - Make sure a const and define are used.
-- edit operator in stack.cpp
+- Exceptions.
 
 # To Or:
-- checkings account example takes RATE in overdraft field.
-- Array<Account*> bankAccounts; should be field in Menu or arg in mainMenu()?
+
