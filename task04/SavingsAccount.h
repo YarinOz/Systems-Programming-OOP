@@ -20,9 +20,12 @@ class SavingsAccount : public Account
 
       void deposit(const double amount) override;
       void withdraw(const double amount) override;
+      void addInterest();
 
-      // void print(std::ostream& os) const;
-      // friend std::ostream& operator<<(std::ostream& os, const SavingsAccount& other);
+      void print(ostream& os) override{
+         this->addInterest(); // add the interest
+         Account::print(os);
+      };
 
 };
 

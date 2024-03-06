@@ -9,25 +9,25 @@ SavingsAccount::SavingsAccount(const std::string& number, const std::string& hol
 
 void SavingsAccount::deposit(const double amount)
 {  
-    std::chrono::steady_clock::time_point CTS = std::chrono::steady_clock::now(); // current time stamp
-    std::chrono::duration<int> t = std::chrono::duration_cast<std::chrono::duration<int>>(CTS - lastTransactionTime);
-    int t_seconds = t.count(); // time difference in seconds
-    // A_t = A_0 * (1 + r)^(t)
-    double A = (this->Balance) * pow(1 + annualInterestRate,t_seconds);
-    this->Balance = A + amount;  // deposit the difference (itrest(current balance) + amount)
-    lastTransactionTime = std::chrono::steady_clock::now();
+    this->addInterest(); // add the interest
+    this->Balance += amount;  // deposit the difference (itrest(current balance) + amount)
     cout << (*this) << endl;
 }
 
 void SavingsAccount::withdraw(const double amount)
 {  
+    this->addInterest(); // add the interest
+    this->Balance -= amount; // withdraw the amount
+}
+
+void SavingsAccount::addInterest()
+{
     std::chrono::steady_clock::time_point a = std::chrono::steady_clock::now(); // current time stamp
     std::chrono::duration<int> t = std::chrono::duration_cast<std::chrono::duration<int>>(a - lastTransactionTime);
     int t_seconds = t.count();
     // A_t = A_0 * (1 + r)^(t)
     double A = this->Balance * pow(1 + annualInterestRate,t_seconds);
-    this->Balance += A; // deposit the interest
-    this->Balance -= amount; // withdraw the amount
+    this->Balance = A; // deposit the interest
     lastTransactionTime = std::chrono::steady_clock::now();
 }
 

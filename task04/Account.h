@@ -17,7 +17,7 @@ protected:
 
 public:
    Account(const std::string& number, const std::string& holder, const double initialBalance);
-   ~Account(){};
+   virtual ~Account(){};
 
    // getters
    double getBalance() const { return Balance; }
@@ -26,9 +26,17 @@ public:
    // pure virtual functions
    virtual void deposit(const double amount)=0;
    virtual void withdraw(const double amount)=0;
+   virtual void print(ostream& os) {
+      os << "Account Number: " << accountNumber << endl;
+      os << "Account Holder: " << accountHolderName << endl;
+      os << "New Balance: " << "$" << Balance;
+   };
 
    // operator overloading
-   friend ostream& operator<<(ostream& os, const Account& other);
+   friend ostream& operator<<(ostream& os, Account& other){
+      other.print(os);
+      return os;
+   }
 
 };
 
