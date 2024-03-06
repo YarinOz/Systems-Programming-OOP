@@ -26,7 +26,7 @@ public:
    // pure virtual functions
    virtual void deposit(const double amount)=0;
    virtual void withdraw(const double amount)=0;
-   virtual void print(ostream& os) {
+   virtual void print(ostream& os) {   // not const because in savings print we change the balance
       os << "Account Number: " << accountNumber << endl;
       os << "Account Holder: " << accountHolderName << endl;
       os << "New Balance: " << "$" << Balance;

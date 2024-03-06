@@ -16,8 +16,13 @@ void SavingsAccount::deposit(const double amount)
 
 void SavingsAccount::withdraw(const double amount)
 {  
+    if (this->Balance - amount < 0)
+    {
+        throw invalid_argument("Error: Insufficient funds.");
+    }
     this->addInterest(); // add the interest
     this->Balance -= amount; // withdraw the amount
+    cout << (*this) << endl;
 }
 
 void SavingsAccount::addInterest()

@@ -18,7 +18,8 @@ void CheckingAccount::withdraw(const double amount)
 {
     if (this->Balance - amount < -overdraftLimit)
     {
-        throw std::invalid_argument("Overdraft limit exceeded");
+        throw invalid_argument("Error: Withdrawal amount exceeds overdraft limit.");
     }
     this->Balance -= amount;
+    cout << (*this) << endl;
 }
