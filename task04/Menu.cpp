@@ -153,6 +153,7 @@ void Menu::mainMenu()
                 for (int i = 0; i < size; i++)
                 {
                     delete bankAccounts[i];
+                    bankAccounts.remove(i);
                 }
                 cout << "Exiting..." << endl;
                 choice = 6;

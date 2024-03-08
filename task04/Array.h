@@ -22,7 +22,7 @@ class Array
       
    public:
       Array():size(0), arr(nullptr){}
-      ~Array(){delete[] arr;}
+      ~Array(){}
       void add(const T& element); 
       T remove(const int index);
       int getSize() const;
