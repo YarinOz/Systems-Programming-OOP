@@ -17,9 +17,6 @@ class CheckingAccount : public Account
       
       void deposit(const double amount) override;
       void withdraw(const double amount) override;
-
-      // void print(std::ostream& os) const;
-      // friend std::ostream& operator<<(std::ostream& os, const CheckingAccount& other);
 };
 
 
