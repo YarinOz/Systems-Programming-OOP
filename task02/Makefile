@@ -11,7 +11,4 @@ run:
 mine: 
 	./main.out < $(INPUT) > myoutput.txt
 
-yoram: 
-	./task02.out < $(INPUT) > yoramoutput.txt
-
-test: mine yoram
+test: mine 
