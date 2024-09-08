@@ -7,13 +7,6 @@
 //#define DEBUGON
 /***************************YOU MUST REMARK IT BEFORE SUBMISSION***********************************/
 /**************************************************************************************************/
-
-/* Submitters
-Name1: Yarin Oziel     ID: 319149878
-Name2: Itamar Meir     ID: 208536888
-*/
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
