@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// Itamar Meir 208536888; Yarin Oziel 319149878
-
 #define MAX_FLOORS 10
 
 void num_map(int floorNumber, char Floors[MAX_FLOORS][10]){
